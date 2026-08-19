@@ -156,7 +156,7 @@
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg>
         </button>
 
-        <div class="mega-panel absolute left-1/2 -translate-x-1/2 top-full w-[780px] bg-white border border-[var(--putty)] shadow-2xl p-6 grid grid-cols-5 gap-4 rounded-b-sm">
+        <div class="mega-panel absolute left-1/2 -translate-x-1/2 top-full w-[90vw] max-w-[780px] bg-white border border-[var(--putty)] shadow-2xl p-6 grid grid-cols-2 sm:grid-cols-5 gap-4 rounded-b-sm">
           <a href="#range/marquis" onclick="router.navigate('range/marquis'); return false;" class="group text-left p-2 hover:bg-[var(--stone)] transition">
             <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-2.5">
               <img src="https://images.unsplash.com/photo-1682888818696-906287d759f5?w=300&h=380&fit=crop&auto=format&q=80" class="specimen w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Marquis range">
@@ -214,7 +214,11 @@
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobileMenu" class="hidden lg:hidden border-t border-[var(--putty)] px-6 py-6 flex flex-col gap-4 font-mono uppercase text-xs tracking-wider bg-[var(--stone)] shadow-lg">
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-[var(--putty)] px-6 py-6 flex flex-col gap-4 font-mono uppercase text-xs tracking-wider bg-[var(--stone)] shadow-lg max-h-[80vh] overflow-y-auto">
+    <div class="mb-2">
+      <p class="text-[var(--sage)] font-bold mb-1.5">Search Catalogue</p>
+      <input type="text" id="mobileSearchInput" placeholder="e.g. Crest, Compact..." class="w-full bg-white border border-[var(--putty)] p-2.5 text-xs text-[var(--ink)] focus:outline-none">
+    </div>
     <p class="text-[var(--sage)] font-bold mb-1">Ranges</p>
     <a href="#range/marquis" onclick="router.navigate('range/marquis'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Marquis Range</a>
     <a href="#range/beaumont" onclick="router.navigate('range/beaumont'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Beaumont Range</a>
@@ -235,34 +239,34 @@
   <!-- ==================== VIEW 1: HOME PAGE ==================== -->
   <div id="view-home" class="view-section">
     <!-- HERO CAROUSEL -->
-    <section class="relative h-[75vh] min-h-[500px] overflow-hidden bg-[var(--ink)]" id="carousel">
+    <section class="relative h-[75vh] min-h-[480px] overflow-hidden bg-[var(--ink)]" id="carousel">
       <div class="slide active" data-slide>
         <img src="https://images.unsplash.com/photo-1754788358645-d6e6cca12e25?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Marquis vanity, sage tone">
         <div class="absolute inset-0 bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/75 to-black/30"></div>
-        <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-white z-10">
-          <span class="inline-block font-mono text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3.5 py-1.5 mb-4 shadow">Australian Craftsmanship — 01/03</span>
-          <h1 class="font-display text-4xl md:text-6xl leading-[1.08] mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Furniture built<br>for the wet room.</h1>
-          <button onclick="router.navigate('range/marquis')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-6 py-3.5 hover:bg-[var(--stone)] transition shadow-xl">Browse the ranges →</button>
+        <div class="absolute bottom-10 sm:bottom-14 left-4 sm:left-6 md:left-16 right-4 sm:right-auto max-w-xl text-white z-10">
+          <span class="inline-block font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3 py-1 sm:px-3.5 sm:py-1.5 mb-3 sm:mb-4 shadow">Australian Craftsmanship — 01/03</span>
+          <h1 class="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-5 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Furniture built <br class="hidden sm:inline">for the wet room.</h1>
+          <button onclick="router.navigate('range/marquis')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-5 py-3 sm:px-6 sm:py-3.5 hover:bg-[var(--stone)] transition shadow-xl">Browse the ranges →</button>
         </div>
       </div>
 
       <div class="slide" data-slide>
         <img src="https://images.unsplash.com/photo-1748680137039-fd8873e5bd48?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Tradelink vanity detail">
         <div class="absolute inset-0 bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/75 to-black/30"></div>
-        <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-white z-10">
-          <span class="inline-block font-mono text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3.5 py-1.5 mb-4 shadow">Trade & Architectural Specs — 02/03</span>
-          <h1 class="font-display text-4xl md:text-6xl leading-[1.08] mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Spec sheets & order forms,<br>ready to download.</h1>
-          <button onclick="router.navigate('range/beaumont')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-6 py-3.5 hover:bg-[var(--stone)] transition shadow-xl">View Beaumont Collection →</button>
+        <div class="absolute bottom-10 sm:bottom-14 left-4 sm:left-6 md:left-16 right-4 sm:right-auto max-w-xl text-white z-10">
+          <span class="inline-block font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3 py-1 sm:px-3.5 sm:py-1.5 mb-3 sm:mb-4 shadow">Trade & Architectural Specs — 02/03</span>
+          <h1 class="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-5 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Spec sheets & order forms, <br class="hidden sm:inline">ready to download.</h1>
+          <button onclick="router.navigate('range/beaumont')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-5 py-3 sm:px-6 sm:py-3.5 hover:bg-[var(--stone)] transition shadow-xl">View Beaumont Collection →</button>
         </div>
       </div>
 
       <div class="slide" data-slide>
         <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Samios compact vanity">
         <div class="absolute inset-0 bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/75 to-black/30"></div>
-        <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-white z-10">
-          <span class="inline-block font-mono text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3.5 py-1.5 mb-4 shadow">Small Space Living — 03/03</span>
-          <h1 class="font-display text-4xl md:text-6xl leading-[1.08] mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Compact ranges,<br>full-size thinking.</h1>
-          <button onclick="router.navigate('range/bluespace')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-6 py-3.5 hover:bg-[var(--stone)] transition shadow-xl">Explore Blue Space →</button>
+        <div class="absolute bottom-10 sm:bottom-14 left-4 sm:left-6 md:left-16 right-4 sm:right-auto max-w-xl text-white z-10">
+          <span class="inline-block font-mono text-[10px] sm:text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3 py-1 sm:px-3.5 sm:py-1.5 mb-3 sm:mb-4 shadow">Small Space Living — 03/03</span>
+          <h1 class="font-display text-3xl sm:text-4xl md:text-6xl leading-[1.1] mb-5 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Compact ranges, <br class="hidden sm:inline">full-size thinking.</h1>
+          <button onclick="router.navigate('range/bluespace')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-5 py-3 sm:px-6 sm:py-3.5 hover:bg-[var(--stone)] transition shadow-xl">Explore Blue Space →</button>
         </div>
       </div>
 
@@ -273,45 +277,45 @@
     </section>
 
     <!-- ABOUT SECTION SUMMARY -->
-    <section class="max-w-4xl mx-auto px-6 md:px-8 py-20 text-center">
-      <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--sage)] mb-4">About us</p>
-      <h2 class="font-display text-2xl md:text-4xl leading-relaxed text-[var(--ink)]">
+    <section class="max-w-4xl mx-auto px-4 py-12 sm:px-6 md:px-8 sm:py-20 text-center">
+      <p class="font-mono text-[10px] sm:text-xs uppercase tracking-[0.2em] text-[var(--sage)] mb-3">About us</p>
+      <h2 class="font-display text-xl sm:text-2xl md:text-4xl leading-snug sm:leading-relaxed text-[var(--ink)]">
         Marquis designs bathroom furniture for the way rooms are actually built and lived in —
         drawn up with installers, specified by architects, and finished to sit quietly in a space
         for twenty years. Five ranges, one standard of joinery.
       </h2>
-      <div class="mt-8 flex justify-center gap-6">
-        <button onclick="router.navigate('finishes')" class="font-mono text-xs uppercase tracking-wider underline-grow">Explore Finishes & Materials →</button>
-        <button onclick="router.navigate('stockists')" class="font-mono text-xs uppercase tracking-wider underline-grow">Locate Stockists →</button>
+      <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
+        <button onclick="router.navigate('finishes')" class="font-mono text-[10px] sm:text-xs uppercase tracking-wider underline-grow">Explore Finishes & Materials →</button>
+        <button onclick="router.navigate('stockists')" class="font-mono text-[10px] sm:text-xs uppercase tracking-wider underline-grow">Locate Stockists →</button>
       </div>
     </section>
 
     <!-- RANGES GRID SECTION -->
-    <section class="max-w-7xl mx-auto px-6 md:px-8 pb-24">
-      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 border-b border-[var(--putty)] pb-6 gap-4">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pb-16 sm:pb-24">
+      <div class="flex flex-row items-end justify-between mb-6 sm:mb-10 border-b border-[var(--putty)] pb-4 sm:pb-6 gap-2">
         <div>
-          <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Collections</span>
-          <h2 class="font-display text-3xl md:text-4xl mt-1">Shop by range</h2>
+          <span class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[var(--sage)]">Collections</span>
+          <h2 class="font-display text-2xl sm:text-3xl md:text-4xl mt-0.5">Shop by range</h2>
         </div>
-        <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage)]">5 Exclusive Collections Available</p>
+        <p class="font-mono text-[10px] sm:text-xs uppercase tracking-wide text-[var(--sage)]">5 Collections</p>
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-2 gap-3 sm:gap-8">
 
         <!-- Marquis Card -->
         <div onclick="router.navigate('range/marquis')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
           <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
             <img src="https://images.unsplash.com/photo-1682888818696-906287d759f5?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Marquis range">
-            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="01 / 05"></span>
+            <span class="index-mark absolute top-2 left-2 sm:top-4 sm:left-4 text-white/90 font-mono text-[10px] sm:text-xs bg-[var(--ink)]/60 px-1.5 py-0.5 sm:px-2 sm:py-1 backdrop-blur" data-index="01 / 05"></span>
           </div>
-          <div class="p-6">
+          <div class="p-3 sm:p-6">
             <div class="flex items-center justify-between">
-              <h3 class="font-display text-2xl">Marquis</h3>
-              <span class="font-mono text-xs text-[var(--sage)]">Signature →</span>
+              <h3 class="font-display text-lg sm:text-2xl">Marquis</h3>
+              <span class="font-mono text-[10px] sm:text-xs text-[var(--sage)]">Signature →</span>
             </div>
-            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Signature range · vanities, mirrors, tallboys</p>
-            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+            <p class="text-xs sm:text-sm text-[var(--ink)]/70 mt-1 sm:mt-1.5">Signature range · vanities, mirrors</p>
+            <div class="drawer mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs text-[var(--sage)] space-y-0.5 sm:space-y-1">
+              <p class="border-t border-[var(--putty)] pt-2 sm:pt-3">— Spec Sheet</p>
               <p>— Order Form</p>
               <p>— Info Sheet</p>
               <p>— Images</p>
@@ -323,16 +327,16 @@
         <div onclick="router.navigate('range/beaumont')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
           <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
             <img src="https://images.unsplash.com/photo-1712214741533-3dd5b8013ca7?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Beaumont range">
-            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="02 / 05"></span>
+            <span class="index-mark absolute top-2 left-2 sm:top-4 sm:left-4 text-white/90 font-mono text-[10px] sm:text-xs bg-[var(--ink)]/60 px-1.5 py-0.5 sm:px-2 sm:py-1 backdrop-blur" data-index="02 / 05"></span>
           </div>
-          <div class="p-6">
+          <div class="p-3 sm:p-6">
             <div class="flex items-center justify-between">
-              <h3 class="font-display text-2xl">Beaumont</h3>
-              <span class="font-mono text-xs text-[var(--sage)]">Exclusive →</span>
+              <h3 class="font-display text-lg sm:text-2xl">Beaumont</h3>
+              <span class="font-mono text-[10px] sm:text-xs text-[var(--sage)]">Exclusive →</span>
             </div>
-            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Exclusive tiles · matched vanity finishes</p>
-            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+            <p class="text-xs sm:text-sm text-[var(--ink)]/70 mt-1 sm:mt-1.5">Exclusive tiles · vanity finishes</p>
+            <div class="drawer mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs text-[var(--sage)] space-y-0.5 sm:space-y-1">
+              <p class="border-t border-[var(--putty)] pt-2 sm:pt-3">— Spec Sheet</p>
               <p>— Order Form</p>
               <p>— Info Sheet</p>
               <p>— Images</p>
@@ -344,16 +348,16 @@
         <div onclick="router.navigate('range/tradelink')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
           <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
             <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Tradelink range">
-            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="03 / 05"></span>
+            <span class="index-mark absolute top-2 left-2 sm:top-4 sm:left-4 text-white/90 font-mono text-[10px] sm:text-xs bg-[var(--ink)]/60 px-1.5 py-0.5 sm:px-2 sm:py-1 backdrop-blur" data-index="03 / 05"></span>
           </div>
-          <div class="p-6">
+          <div class="p-3 sm:p-6">
             <div class="flex items-center justify-between">
-              <h3 class="font-display text-2xl">Tradelink</h3>
-              <span class="font-mono text-xs text-[var(--sage)]">Trade →</span>
+              <h3 class="font-display text-lg sm:text-2xl">Tradelink</h3>
+              <span class="font-mono text-[10px] sm:text-xs text-[var(--sage)]">Trade →</span>
             </div>
-            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Trade essentials · fast lead times</p>
-            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+            <p class="text-xs sm:text-sm text-[var(--ink)]/70 mt-1 sm:mt-1.5">Trade essentials · fast lead times</p>
+            <div class="drawer mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs text-[var(--sage)] space-y-0.5 sm:space-y-1">
+              <p class="border-t border-[var(--putty)] pt-2 sm:pt-3">— Spec Sheet</p>
               <p>— Order Form</p>
               <p>— Info Sheet</p>
               <p>— Images</p>
@@ -365,16 +369,16 @@
         <div onclick="router.navigate('range/samios')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
           <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
             <img src="https://images.unsplash.com/photo-1604769319166-010643ace337?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Samios range">
-            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="04 / 05"></span>
+            <span class="index-mark absolute top-2 left-2 sm:top-4 sm:left-4 text-white/90 font-mono text-[10px] sm:text-xs bg-[var(--ink)]/60 px-1.5 py-0.5 sm:px-2 sm:py-1 backdrop-blur" data-index="04 / 05"></span>
           </div>
-          <div class="p-6">
+          <div class="p-3 sm:p-6">
             <div class="flex items-center justify-between">
-              <h3 class="font-display text-2xl">Samios</h3>
-              <span class="font-mono text-xs text-[var(--sage)]">Considered →</span>
+              <h3 class="font-display text-lg sm:text-2xl">Samios</h3>
+              <span class="font-mono text-[10px] sm:text-xs text-[var(--sage)]">Considered →</span>
             </div>
-            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Considered forms · natural stone tops</p>
-            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+            <p class="text-xs sm:text-sm text-[var(--ink)]/70 mt-1 sm:mt-1.5">Considered forms · stone tops</p>
+            <div class="drawer mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs text-[var(--sage)] space-y-0.5 sm:space-y-1">
+              <p class="border-t border-[var(--putty)] pt-2 sm:pt-3">— Spec Sheet</p>
               <p>— Order Form</p>
               <p>— Info Sheet</p>
               <p>— Images</p>
@@ -386,16 +390,16 @@
         <div onclick="router.navigate('range/bluespace')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
           <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
             <img src="https://images.unsplash.com/photo-1635286771551-9d7241ce7811?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Blue Space range">
-            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="05 / 05"></span>
+            <span class="index-mark absolute top-2 left-2 sm:top-4 sm:left-4 text-white/90 font-mono text-[10px] sm:text-xs bg-[var(--ink)]/60 px-1.5 py-0.5 sm:px-2 sm:py-1 backdrop-blur" data-index="05 / 05"></span>
           </div>
-          <div class="p-6">
+          <div class="p-3 sm:p-6">
             <div class="flex items-center justify-between">
-              <h3 class="font-display text-2xl">Blue Space</h3>
-              <span class="font-mono text-xs text-[var(--sage)]">Compact →</span>
+              <h3 class="font-display text-lg sm:text-2xl">Blue Space</h3>
+              <span class="font-mono text-[10px] sm:text-xs text-[var(--sage)]">Compact →</span>
             </div>
-            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Compact living · small-format bathrooms</p>
-            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+            <p class="text-xs sm:text-sm text-[var(--ink)]/70 mt-1 sm:mt-1.5">Compact living · powder rooms</p>
+            <div class="drawer mt-2 sm:mt-3 font-mono text-[10px] sm:text-xs text-[var(--sage)] space-y-0.5 sm:space-y-1">
+              <p class="border-t border-[var(--putty)] pt-2 sm:pt-3">— Spec Sheet</p>
               <p>— Order Form</p>
               <p>— Info Sheet</p>
               <p>— Images</p>
@@ -404,13 +408,13 @@
         </div>
 
         <!-- CTA Tile -->
-        <div class="flex flex-col justify-between bg-[var(--sage)] text-[var(--stone)] p-8 border border-[var(--sage)]">
+        <div class="flex flex-col justify-between bg-[var(--sage)] text-[var(--stone)] p-4 sm:p-8 border border-[var(--sage)]">
           <div>
-            <p class="font-mono text-xs uppercase tracking-widest text-[var(--sage-pale)] mb-3">Catalogue PDF</p>
-            <h3 class="font-display text-3xl mb-4 leading-tight">Can't decide? Download the full range brochure.</h3>
-            <p class="text-sm text-[var(--sage-pale)]/90 leading-relaxed mb-6">Access complete dimensions, custom finish swatches, and ordering matrices in one document.</p>
+            <p class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-[var(--sage-pale)] mb-2 sm:mb-3">Catalogue PDF</p>
+            <h3 class="font-display text-lg sm:text-3xl mb-2 sm:mb-4 leading-tight">Can't decide? Download brochure.</h3>
+            <p class="text-xs sm:text-sm text-[var(--sage-pale)]/90 leading-relaxed mb-4 sm:mb-6 hidden xs:block">Access complete dimensions & finish swatches.</p>
           </div>
-          <button onclick="router.navigate('brochures')" class="inline-flex justify-center items-center font-mono text-xs uppercase tracking-wider border border-[var(--stone)] px-5 py-3 hover:bg-[var(--stone)] hover:text-[var(--sage)] transition">Get the brochure →</button>
+          <button onclick="router.navigate('brochures')" class="inline-flex justify-center items-center font-mono text-[10px] sm:text-xs uppercase tracking-wider border border-[var(--stone)] px-3 py-2 sm:px-5 sm:py-3 hover:bg-[var(--stone)] hover:text-[var(--sage)] transition">Get brochure →</button>
         </div>
 
       </div>
@@ -443,20 +447,20 @@
     </div>
 
     <!-- TAG FILTER BAR -->
-    <div class="flex flex-wrap items-center justify-between gap-4 py-4 px-5 bg-[var(--stone-deep)]/50 border border-[var(--putty)] mb-10">
-      <div class="flex flex-wrap items-center gap-2" id="tagFilters">
-        <span class="font-mono text-xs text-[var(--ink)] font-medium mr-2 uppercase tracking-wide">Filter by Tag:</span>
-        <button onclick="rangeApp.filterByTag('all')" class="tag-btn active font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">All Items</button>
-        <button onclick="rangeApp.filterByTag('vanity')" class="tag-btn font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Vanity</button>
-        <button onclick="rangeApp.filterByTag('compact')" class="tag-btn font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Compact</button>
-        <button onclick="rangeApp.filterByTag('mirror')" class="tag-btn font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Mirror Cabinet</button>
+    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 py-3 px-3 sm:py-4 sm:px-5 bg-[var(--stone-deep)]/50 border border-[var(--putty)] mb-8 sm:mb-10">
+      <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0 whitespace-nowrap scrollbar-none" id="tagFilters">
+        <span class="font-mono text-[10px] sm:text-xs text-[var(--ink)] font-medium mr-1 uppercase tracking-wide shrink-0">Filter by Tag:</span>
+        <button onclick="rangeApp.filterByTag('all')" class="tag-btn active shrink-0 font-mono text-[10px] sm:text-xs px-2.5 py-1 sm:px-3.5 sm:py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">All Items</button>
+        <button onclick="rangeApp.filterByTag('vanity')" class="tag-btn shrink-0 font-mono text-[10px] sm:text-xs px-2.5 py-1 sm:px-3.5 sm:py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Vanity</button>
+        <button onclick="rangeApp.filterByTag('compact')" class="tag-btn shrink-0 font-mono text-[10px] sm:text-xs px-2.5 py-1 sm:px-3.5 sm:py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Compact</button>
+        <button onclick="rangeApp.filterByTag('mirror')" class="tag-btn shrink-0 font-mono text-[10px] sm:text-xs px-2.5 py-1 sm:px-3.5 sm:py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Mirror Cabinet</button>
       </div>
 
-      <span class="font-mono text-xs text-[var(--sage)]" id="productCountLabel">Showing 12 Products</span>
+      <span class="font-mono text-[10px] sm:text-xs text-[var(--sage)] shrink-0" id="productCountLabel">Showing 12 Products</span>
     </div>
 
-    <!-- PRODUCT CARDS GRID (4 COLUMNS AS SHOWN IN PAGE_2.JPG) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7" id="productGrid"></div>
+    <!-- PRODUCT CARDS GRID (2 COLUMNS MOBILE, 4 COLUMNS DESKTOP MATCHING PAGE_2.JPG WIREFRAME) -->
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-7" id="productGrid"></div>
   </div>
 
   <!-- ==================== VIEW 3: DYNAMIC PRODUCT DETAIL PAGE ==================== -->
@@ -1109,42 +1113,42 @@
             <!-- CLICKABLE PRODUCT IMAGE TO OPEN DETAIL PAGE -->
             <div onclick="router.navigate('product/${item.id}')" class="aspect-[4/5] bg-[var(--stone-deep)] overflow-hidden relative group cursor-pointer">
               <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 specimen">
-              <span class="absolute top-3 right-3 bg-[var(--stone)]/90 text-[var(--ink)] font-mono text-[10px] uppercase px-2 py-0.5 border border-[var(--putty)]">${item.category}</span>
+              <span class="absolute top-2 right-2 sm:top-3 sm:right-3 bg-[var(--stone)]/90 text-[var(--ink)] font-mono text-[9px] sm:text-[10px] uppercase px-1.5 py-0.5 border border-[var(--putty)]">${item.category}</span>
             </div>
 
             <!-- CLICKABLE PRODUCT NAME -->
-            <div class="p-4 border-b border-[var(--putty)]/60">
-              <h3 onclick="router.navigate('product/${item.id}')" class="font-display text-lg font-medium text-[var(--ink)] cursor-pointer hover:underline hover:text-[var(--sage)] transition">${item.name}</h3>
-              <p class="text-xs text-[var(--ink)]/60 mt-1 line-clamp-2">${item.specs}</p>
+            <div class="p-2.5 sm:p-4 border-b border-[var(--putty)]/60">
+              <h3 onclick="router.navigate('product/${item.id}')" class="font-display text-sm sm:text-lg font-medium text-[var(--ink)] cursor-pointer hover:underline hover:text-[var(--sage)] transition">${item.name}</h3>
+              <p class="text-[10px] sm:text-xs text-[var(--ink)]/60 mt-0.5 sm:mt-1 line-clamp-2">${item.specs}</p>
             </div>
           </div>
 
           <!-- TECHNICAL DOWNLOAD LINKS AS IN PAGE_2.JPG -->
-          <div class="p-4 bg-[var(--stone)]/30 font-mono text-xs">
-            <p class="text-[10px] uppercase text-[var(--sage)] font-semibold tracking-wider mb-2">Technical Downloads</p>
-            <ul class="space-y-1.5 text-[var(--ink)]/80">
+          <div class="p-2.5 sm:p-4 bg-[var(--stone)]/30 font-mono text-[10px] sm:text-xs">
+            <p class="text-[9px] sm:text-[10px] uppercase text-[var(--sage)] font-semibold tracking-wider mb-1.5 sm:mb-2">Technical Downloads</p>
+            <ul class="space-y-1 sm:space-y-1.5 text-[var(--ink)]/80">
               <li>
                 <button onclick="modals.downloadDoc('${item.name}', 'Spec Sheet')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
                   <span>- Spec Sheet</span>
-                  <span class="text-[10px] text-[var(--sage)]">PDF</span>
+                  <span class="text-[9px] sm:text-[10px] text-[var(--sage)]">PDF</span>
                 </button>
               </li>
               <li>
                 <button onclick="modals.downloadDoc('${item.name}', 'Order Form')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
                   <span>- Order Form</span>
-                  <span class="text-[10px] text-[var(--sage)]">PDF</span>
+                  <span class="text-[9px] sm:text-[10px] text-[var(--sage)]">PDF</span>
                 </button>
               </li>
               <li>
                 <button onclick="modals.downloadDoc('${item.name}', 'Info Sheet')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
                   <span>- Info Sheet</span>
-                  <span class="text-[10px] text-[var(--sage)]">PDF</span>
+                  <span class="text-[9px] sm:text-[10px] text-[var(--sage)]">PDF</span>
                 </button>
               </li>
               <li>
                 <button onclick="modals.downloadDoc('${item.name}', 'Images')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
                   <span>- Images</span>
-                  <span class="text-[10px] text-[var(--sage)]">ZIP</span>
+                  <span class="text-[9px] sm:text-[10px] text-[var(--sage)]">ZIP</span>
                 </button>
               </li>
             </ul>
@@ -1163,6 +1167,18 @@
       rangeApp.renderProducts();
     }
   });
+
+  const mobileSearchInput = document.getElementById('mobileSearchInput');
+  if (mobileSearchInput) {
+    mobileSearchInput.addEventListener('input', (e) => {
+      document.getElementById('catalogueSearch').value = e.target.value;
+      if (document.getElementById('view-range').classList.contains('hidden')) {
+        router.navigate('range/beaumont');
+      } else {
+        rangeApp.renderProducts();
+      }
+    });
+  }
 
   // ================= TOAST NOTIFICATION SYSTEM =================
   class Modals {
