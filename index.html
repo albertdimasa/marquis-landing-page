@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Marquis — Considered Bathroom Furniture</title>
+<meta name="description" content="Explore Marquis Australian bathroom furniture, vanities, mirrors, and compact living ranges specified for architects, builders, and homeowners.">
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Elms+Sans:wght@300;400;500;600;700&family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --stone:#F2EFE8;
@@ -20,15 +21,15 @@
     --white:#FFFFFF;
   }
   html{scroll-behavior:smooth;}
-  body{background:var(--stone); color:var(--ink); font-family:'Work Sans',sans-serif;}
+  body{background:var(--stone); color:var(--ink); font-family:'Elma Sans', 'Elms Sans', 'Work Sans', sans-serif;}
   .font-display{font-family:'Fraunces',serif;}
   .font-mono{font-family:'IBM Plex Mono',monospace;}
 
   .specimen{
-    filter: grayscale(45%) sepia(18%) hue-rotate(48deg) saturate(115%) brightness(0.95) contrast(1.02);
+    filter: grayscale(35%) sepia(12%) hue-rotate(40deg) saturate(110%) brightness(0.96);
   }
   .specimen-strong{
-    filter: grayscale(60%) sepia(22%) hue-rotate(48deg) saturate(130%) brightness(0.82) contrast(1.05);
+    filter: grayscale(50%) sepia(20%) hue-rotate(45deg) saturate(125%) brightness(0.85);
   }
 
   .mega-panel{
@@ -40,8 +41,15 @@
     opacity:1; visibility:visible; transform:translateY(0);
   }
 
-  .slide{opacity:0; transition:opacity 1s ease; position:absolute; inset:0;}
-  .slide.active{opacity:1; position:relative;}
+  .slide{
+    opacity:0; visibility:hidden; z-index:0;
+    transition:opacity 0.8s ease, visibility 0.8s ease;
+    position:absolute; inset:0; pointer-events:none;
+  }
+  .slide.active{
+    opacity:1; visibility:visible; z-index:10;
+    pointer-events:auto;
+  }
 
   .range-card .drawer{
     max-height:0; opacity:0; overflow:hidden;
@@ -55,7 +63,7 @@
   }
   .plate{ transition: transform .35s ease, filter .35s ease; }
   .range-card:hover .plate img, .range-card:focus-within .plate img{
-    filter: grayscale(20%) sepia(10%) hue-rotate(48deg) saturate(120%) brightness(1.02);
+    filter: grayscale(15%) sepia(8%) hue-rotate(40deg) saturate(115%) brightness(1.02);
   }
 
   .index-mark::before{
@@ -68,317 +76,1122 @@
   .underline-grow{position:relative;}
   .underline-grow::after{
     content:'';position:absolute;left:0;bottom:-2px;height:1px;width:0%;
-    background:var(--ink); transition:width .25s ease;
+    background:currentColor; transition:width .25s ease;
   }
   .underline-grow:hover::after{width:100%;}
+
+  .tag-btn.active{
+    background: var(--ink);
+    color: var(--stone);
+    border-color: var(--ink);
+  }
+
+  .view-section {
+    will-change: opacity, transform;
+  }
+  .view-section.view-enter {
+    animation: viewEnter 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes viewEnter {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.995);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .product-card-anim {
+    animation: cardPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: opacity, transform;
+  }
+  @keyframes cardPopIn {
+    from {
+      opacity: 0;
+      transform: translateY(12px) scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
 
   ::selection{ background:var(--sage-light); color:var(--ink); }
 
   @media (prefers-reduced-motion: reduce){
-    .slide{transition:none;}
+    .slide, .view-section.view-enter{transition:none; animation:none;}
     html{scroll-behavior:auto;}
   }
 </style>
 </head>
-<body class="antialiased">
+<body class="antialiased flex flex-col min-h-screen">
 
 <!-- ============ UTILITY BAR ============ -->
-<div class="hidden md:flex items-center justify-between px-8 py-2 bg-[var(--ink)] text-[var(--stone)] text-xs font-mono tracking-wide">
-  <a href="#" class="underline-grow opacity-90 hover:opacity-100">View our Express Range →</a>
-  <div class="flex items-center gap-2 opacity-90">
-    <span>Search catalogue</span>
-    <div class="w-40 h-5 border-b border-[var(--stone-deep)]/40"></div>
+<div class="hidden md:flex items-center justify-between px-8 py-2.5 bg-[var(--ink)] text-[var(--stone)] text-xs font-mono tracking-wide z-50">
+  <button onclick="router.navigate('range/marquis')" class="underline-grow opacity-90 hover:opacity-100 flex items-center gap-1.5">
+    View our Express Range →
+  </button>
+  <div class="flex items-center gap-6 opacity-90">
+    <div class="flex items-center gap-2">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <span>Search catalogue</span>
+      <input type="text" id="catalogueSearch" placeholder="e.g. Crest, Compact..." class="bg-transparent border-b border-[var(--stone-deep)]/40 text-xs text-[var(--stone)] placeholder:text-[var(--stone)]/40 focus:outline-none focus:border-[var(--sage-light)] px-1 py-0.5 w-36">
+    </div>
+    <button onclick="router.navigate('stockists')" class="hover:text-[var(--sage-light)] transition">Find Stockists</button>
   </div>
 </div>
 
 <!-- ============ MAIN HEADER / NAV ============ -->
-<header class="sticky top-0 z-50 bg-[var(--stone)]/95 backdrop-blur border-b border-[var(--putty)]">
+<header class="sticky top-0 z-40 bg-[var(--stone)]/95 backdrop-blur border-b border-[var(--putty)]">
   <div class="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between h-20">
-    <a href="#" class="font-display text-2xl tracking-[0.15em]">MARQUIS</a>
+    <a href="#home" onclick="router.navigate('home'); return false;" class="font-display text-2xl tracking-[0.15em] hover:opacity-80 transition">MARQUIS</a>
 
-    <nav class="hidden lg:flex items-center gap-10 text-sm font-mono uppercase tracking-wide">
+    <nav class="hidden lg:flex items-center gap-9 text-xs font-mono uppercase tracking-wider">
+      <!-- MEGA MENU DROPDOWN -->
       <div class="relative nav-products">
         <button class="flex items-center gap-1 py-8 underline-grow">
           Products
           <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.2"/></svg>
         </button>
 
-        <!-- MEGA DROPDOWN -->
-        <div class="mega-panel absolute left-1/2 -translate-x-1/2 top-full w-[720px] bg-white border border-[var(--putty)] shadow-xl p-8 grid grid-cols-5 gap-5">
-          <a href="#ranges" class="group text-left">
-            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-3">
+        <div class="mega-panel absolute left-1/2 -translate-x-1/2 top-full w-[780px] bg-white border border-[var(--putty)] shadow-2xl p-6 grid grid-cols-5 gap-4 rounded-b-sm">
+          <a href="#range/marquis" onclick="router.navigate('range/marquis'); return false;" class="group text-left p-2 hover:bg-[var(--stone)] transition">
+            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-2.5">
               <img src="https://images.unsplash.com/photo-1682888818696-906287d759f5?w=300&h=380&fit=crop&auto=format&q=80" class="specimen w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Marquis range">
             </div>
-            <p class="font-display text-base normal-case">Marquis</p>
-            <p class="text-[10px] text-[var(--sage)] normal-case">Signature range</p>
+            <p class="font-display text-sm normal-case font-medium">Marquis</p>
+            <p class="text-[10px] text-[var(--sage)] normal-case">Signature collection</p>
           </a>
-          <a href="#ranges" class="group text-left">
-            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-3">
+          <a href="#range/beaumont" onclick="router.navigate('range/beaumont'); return false;" class="group text-left p-2 hover:bg-[var(--stone)] transition">
+            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-2.5">
               <img src="https://images.unsplash.com/photo-1712214741533-3dd5b8013ca7?w=300&h=380&fit=crop&auto=format&q=80" class="specimen w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Beaumont range">
             </div>
-            <p class="font-display text-base normal-case">Beaumont</p>
-            <p class="text-[10px] text-[var(--sage)] normal-case">Exclusive tiles</p>
+            <p class="font-display text-sm normal-case font-medium">Beaumont</p>
+            <p class="text-[10px] text-[var(--sage)] normal-case">Exclusive tiles range</p>
           </a>
-          <a href="#ranges" class="group text-left">
-            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-3">
+          <a href="#range/tradelink" onclick="router.navigate('range/tradelink'); return false;" class="group text-left p-2 hover:bg-[var(--stone)] transition">
+            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-2.5">
               <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?w=300&h=380&fit=crop&auto=format&q=80" class="specimen w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Tradelink range">
             </div>
-            <p class="font-display text-base normal-case">Tradelink</p>
+            <p class="font-display text-sm normal-case font-medium">Tradelink</p>
             <p class="text-[10px] text-[var(--sage)] normal-case">Trade essentials</p>
           </a>
-          <a href="#ranges" class="group text-left">
-            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-3">
+          <a href="#range/samios" onclick="router.navigate('range/samios'); return false;" class="group text-left p-2 hover:bg-[var(--stone)] transition">
+            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-2.5">
               <img src="https://images.unsplash.com/photo-1604769319166-010643ace337?w=300&h=380&fit=crop&auto=format&q=80" class="specimen w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Samios range">
             </div>
-            <p class="font-display text-base normal-case">Samios</p>
+            <p class="font-display text-sm normal-case font-medium">Samios</p>
             <p class="text-[10px] text-[var(--sage)] normal-case">Considered forms</p>
           </a>
-          <a href="#ranges" class="group text-left">
-            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-3">
+          <a href="#range/bluespace" onclick="router.navigate('range/bluespace'); return false;" class="group text-left p-2 hover:bg-[var(--stone)] transition">
+            <div class="aspect-[4/5] overflow-hidden bg-[var(--stone-deep)] mb-2.5">
               <img src="https://images.unsplash.com/photo-1635286771551-9d7241ce7811?w=300&h=380&fit=crop&auto=format&q=80" class="specimen w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Blue Space range">
             </div>
-            <p class="font-display text-base normal-case">Blue Space</p>
+            <p class="font-display text-sm normal-case font-medium">Blue Space</p>
             <p class="text-[10px] text-[var(--sage)] normal-case">Compact living</p>
           </a>
         </div>
       </div>
 
-      <a href="#about" class="py-8 underline-grow">About us</a>
-      <a href="#" class="py-8 underline-grow">Brochures</a>
-      <a href="#" class="py-8 underline-grow">Stockists</a>
-      <a href="#" class="py-8 underline-grow">Contact us</a>
+      <a href="#about" onclick="router.navigate('about'); return false;" class="py-8 underline-grow">About us</a>
+      <a href="#brochures" onclick="router.navigate('brochures'); return false;" class="py-8 underline-grow">Brochures</a>
+      <a href="#stockists" onclick="router.navigate('stockists'); return false;" class="py-8 underline-grow">Stockists</a>
+      <a href="#contact" onclick="router.navigate('contact'); return false;" class="py-8 underline-grow">Contact us</a>
     </nav>
 
-    <div class="hidden lg:flex items-center gap-4 text-[var(--ink)]">
-      <a href="#" aria-label="Facebook" class="w-8 h-8 rounded-full border border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--stone)] transition">f</a>
-      <a href="#" aria-label="Pinterest" class="w-8 h-8 rounded-full border border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--stone)] transition">p</a>
-      <a href="#" aria-label="Instagram" class="w-8 h-8 rounded-full border border-[var(--ink)] flex items-center justify-center hover:bg-[var(--ink)] hover:text-[var(--stone)] transition">ig</a>
+    <div class="hidden lg:flex items-center gap-3 text-[var(--ink)]">
+      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="w-8 h-8 rounded-full border border-[var(--ink)]/40 flex items-center justify-center text-xs hover:bg-[var(--ink)] hover:text-[var(--stone)] transition">f</a>
+      <a href="https://pinterest.com" target="_blank" rel="noopener" aria-label="Pinterest" class="w-8 h-8 rounded-full border border-[var(--ink)]/40 flex items-center justify-center text-xs hover:bg-[var(--ink)] hover:text-[var(--stone)] transition">p</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="w-8 h-8 rounded-full border border-[var(--ink)]/40 flex items-center justify-center text-xs hover:bg-[var(--ink)] hover:text-[var(--stone)] transition">ig</a>
     </div>
 
-    <button id="mobileToggle" class="lg:hidden font-mono text-xs uppercase tracking-wide border border-[var(--ink)] px-3 py-2">Menu</button>
+    <button id="mobileToggle" aria-label="Toggle Navigation" class="lg:hidden font-mono text-xs uppercase tracking-wide border border-[var(--ink)] px-3 py-2 flex items-center gap-2">
+      <span>Menu</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
   </div>
 
   <!-- Mobile menu -->
-  <div id="mobileMenu" class="hidden lg:hidden border-t border-[var(--putty)] px-6 py-6 flex flex-col gap-4 font-mono uppercase text-sm tracking-wide bg-[var(--stone)]">
-    <a href="#ranges">Products</a>
-    <a href="#about">About us</a>
-    <a href="#">Brochures</a>
-    <a href="#">Stockists</a>
-    <a href="#">Contact us</a>
+  <div id="mobileMenu" class="hidden lg:hidden border-t border-[var(--putty)] px-6 py-6 flex flex-col gap-4 font-mono uppercase text-xs tracking-wider bg-[var(--stone)] shadow-lg">
+    <p class="text-[var(--sage)] font-bold mb-1">Ranges</p>
+    <a href="#range/marquis" onclick="router.navigate('range/marquis'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Marquis Range</a>
+    <a href="#range/beaumont" onclick="router.navigate('range/beaumont'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Beaumont Range</a>
+    <a href="#range/tradelink" onclick="router.navigate('range/tradelink'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Tradelink Range</a>
+    <a href="#range/samios" onclick="router.navigate('range/samios'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Samios Range</a>
+    <a href="#range/bluespace" onclick="router.navigate('range/bluespace'); closeMobileMenu();" class="pl-2 border-l border-[var(--sage-light)]">Blue Space Range</a>
+    <hr class="border-[var(--putty)] my-2">
+    <a href="#about" onclick="router.navigate('about'); closeMobileMenu();">About us</a>
+    <a href="#brochures" onclick="router.navigate('brochures'); closeMobileMenu();">Brochures</a>
+    <a href="#stockists" onclick="router.navigate('stockists'); closeMobileMenu();">Stockists</a>
+    <a href="#contact" onclick="router.navigate('contact'); closeMobileMenu();">Contact us</a>
   </div>
 </header>
 
-<!-- ============ HERO CAROUSEL ============ -->
-<section class="relative h-[78vh] min-h-[520px] overflow-hidden bg-[var(--ink)]" id="carousel">
-  <div class="slide active" data-slide>
-    <img src="https://images.unsplash.com/photo-1754788358645-d6e6cca12e25?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Marquis vanity, sage tone">
-    <div class="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/70 via-[var(--ink)]/10 to-transparent"></div>
-    <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-[var(--stone)]">
-      <p class="font-mono text-xs tracking-[0.2em] uppercase text-[var(--sage-light)] mb-4">Spring collection — 01/03</p>
-      <h1 class="font-display text-4xl md:text-6xl leading-[1.05] mb-5">Furniture built<br>for the wet room.</h1>
-      <a href="#ranges" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide border border-[var(--stone)] px-5 py-3 hover:bg-[var(--stone)] hover:text-[var(--ink)] transition">Browse the ranges →</a>
+<!-- MAIN CONTENT CONTAINER FOR DYNAMIC VIEWS -->
+<main id="app" class="flex-grow">
+
+  <!-- ==================== VIEW 1: HOME PAGE ==================== -->
+  <div id="view-home" class="view-section">
+    <!-- HERO CAROUSEL -->
+    <section class="relative h-[75vh] min-h-[500px] overflow-hidden bg-[var(--ink)]" id="carousel">
+      <div class="slide active" data-slide>
+        <img src="https://images.unsplash.com/photo-1754788358645-d6e6cca12e25?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Marquis vanity, sage tone">
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/75 to-black/30"></div>
+        <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-white z-10">
+          <span class="inline-block font-mono text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3.5 py-1.5 mb-4 shadow">Australian Craftsmanship — 01/03</span>
+          <h1 class="font-display text-4xl md:text-6xl leading-[1.08] mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Furniture built<br>for the wet room.</h1>
+          <button onclick="router.navigate('range/marquis')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-6 py-3.5 hover:bg-[var(--stone)] transition shadow-xl">Browse the ranges →</button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide>
+        <img src="https://images.unsplash.com/photo-1748680137039-fd8873e5bd48?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Tradelink vanity detail">
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/75 to-black/30"></div>
+        <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-white z-10">
+          <span class="inline-block font-mono text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3.5 py-1.5 mb-4 shadow">Trade & Architectural Specs — 02/03</span>
+          <h1 class="font-display text-4xl md:text-6xl leading-[1.08] mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Spec sheets & order forms,<br>ready to download.</h1>
+          <button onclick="router.navigate('range/beaumont')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-6 py-3.5 hover:bg-[var(--stone)] transition shadow-xl">View Beaumont Collection →</button>
+        </div>
+      </div>
+
+      <div class="slide" data-slide>
+        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Samios compact vanity">
+        <div class="absolute inset-0 bg-gradient-to-r from-[var(--ink)] via-[var(--ink)]/75 to-black/30"></div>
+        <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-white z-10">
+          <span class="inline-block font-mono text-xs tracking-[0.2em] uppercase text-white bg-[var(--ink)]/90 border border-[var(--sage-light)]/50 px-3.5 py-1.5 mb-4 shadow">Small Space Living — 03/03</span>
+          <h1 class="font-display text-4xl md:text-6xl leading-[1.08] mb-6 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] font-medium">Compact ranges,<br>full-size thinking.</h1>
+          <button onclick="router.navigate('range/bluespace')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider bg-white text-[var(--ink)] font-semibold px-6 py-3.5 hover:bg-[var(--stone)] transition shadow-xl">Explore Blue Space →</button>
+        </div>
+      </div>
+
+      <button id="prevSlide" aria-label="Previous slide" class="hidden md:flex items-center justify-center absolute left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--ink)]/80 border border-white/50 text-white hover:bg-white hover:text-[var(--ink)] transition z-20 shadow-lg">‹</button>
+      <button id="nextSlide" aria-label="Next slide" class="hidden md:flex items-center justify-center absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-[var(--ink)]/80 border border-white/50 text-white hover:bg-white hover:text-[var(--ink)] transition z-20 shadow-lg">›</button>
+
+      <div class="absolute bottom-6 right-6 md:right-16 flex gap-2 z-20" id="dots"></div>
+    </section>
+
+    <!-- ABOUT SECTION SUMMARY -->
+    <section class="max-w-4xl mx-auto px-6 md:px-8 py-20 text-center">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--sage)] mb-4">About us</p>
+      <h2 class="font-display text-2xl md:text-4xl leading-relaxed text-[var(--ink)]">
+        Marquis designs bathroom furniture for the way rooms are actually built and lived in —
+        drawn up with installers, specified by architects, and finished to sit quietly in a space
+        for twenty years. Five ranges, one standard of joinery.
+      </h2>
+      <div class="mt-8 flex justify-center gap-6">
+        <button onclick="router.navigate('finishes')" class="font-mono text-xs uppercase tracking-wider underline-grow">Explore Finishes & Materials →</button>
+        <button onclick="router.navigate('stockists')" class="font-mono text-xs uppercase tracking-wider underline-grow">Locate Stockists →</button>
+      </div>
+    </section>
+
+    <!-- RANGES GRID SECTION -->
+    <section class="max-w-7xl mx-auto px-6 md:px-8 pb-24">
+      <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10 border-b border-[var(--putty)] pb-6 gap-4">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Collections</span>
+          <h2 class="font-display text-3xl md:text-4xl mt-1">Shop by range</h2>
+        </div>
+        <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage)]">5 Exclusive Collections Available</p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Marquis Card -->
+        <div onclick="router.navigate('range/marquis')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
+          <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
+            <img src="https://images.unsplash.com/photo-1682888818696-906287d759f5?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Marquis range">
+            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="01 / 05"></span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-2xl">Marquis</h3>
+              <span class="font-mono text-xs text-[var(--sage)]">Signature →</span>
+            </div>
+            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Signature range · vanities, mirrors, tallboys</p>
+            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
+              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+              <p>— Order Form</p>
+              <p>— Info Sheet</p>
+              <p>— Images</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Beaumont Card -->
+        <div onclick="router.navigate('range/beaumont')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
+          <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
+            <img src="https://images.unsplash.com/photo-1712214741533-3dd5b8013ca7?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Beaumont range">
+            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="02 / 05"></span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-2xl">Beaumont</h3>
+              <span class="font-mono text-xs text-[var(--sage)]">Exclusive →</span>
+            </div>
+            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Exclusive tiles · matched vanity finishes</p>
+            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
+              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+              <p>— Order Form</p>
+              <p>— Info Sheet</p>
+              <p>— Images</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tradelink Card -->
+        <div onclick="router.navigate('range/tradelink')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
+          <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
+            <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Tradelink range">
+            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="03 / 05"></span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-2xl">Tradelink</h3>
+              <span class="font-mono text-xs text-[var(--sage)]">Trade →</span>
+            </div>
+            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Trade essentials · fast lead times</p>
+            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
+              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+              <p>— Order Form</p>
+              <p>— Info Sheet</p>
+              <p>— Images</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Samios Card -->
+        <div onclick="router.navigate('range/samios')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
+          <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
+            <img src="https://images.unsplash.com/photo-1604769319166-010643ace337?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Samios range">
+            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="04 / 05"></span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-2xl">Samios</h3>
+              <span class="font-mono text-xs text-[var(--sage)]">Considered →</span>
+            </div>
+            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Considered forms · natural stone tops</p>
+            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
+              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+              <p>— Order Form</p>
+              <p>— Info Sheet</p>
+              <p>— Images</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blue Space Card -->
+        <div onclick="router.navigate('range/bluespace')" class="range-card group cursor-pointer bg-white border border-[var(--putty)] overflow-hidden transition hover:shadow-lg" tabindex="0">
+          <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
+            <img src="https://images.unsplash.com/photo-1635286771551-9d7241ce7811?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Blue Space range">
+            <span class="index-mark absolute top-4 left-4 text-white/90 font-mono bg-[var(--ink)]/60 px-2 py-1 backdrop-blur" data-index="05 / 05"></span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-center justify-between">
+              <h3 class="font-display text-2xl">Blue Space</h3>
+              <span class="font-mono text-xs text-[var(--sage)]">Compact →</span>
+            </div>
+            <p class="text-sm text-[var(--ink)]/70 mt-1.5">Compact living · small-format bathrooms</p>
+            <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
+              <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
+              <p>— Order Form</p>
+              <p>— Info Sheet</p>
+              <p>— Images</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Tile -->
+        <div class="flex flex-col justify-between bg-[var(--sage)] text-[var(--stone)] p-8 border border-[var(--sage)]">
+          <div>
+            <p class="font-mono text-xs uppercase tracking-widest text-[var(--sage-pale)] mb-3">Catalogue PDF</p>
+            <h3 class="font-display text-3xl mb-4 leading-tight">Can't decide? Download the full range brochure.</h3>
+            <p class="text-sm text-[var(--sage-pale)]/90 leading-relaxed mb-6">Access complete dimensions, custom finish swatches, and ordering matrices in one document.</p>
+          </div>
+          <button onclick="router.navigate('brochures')" class="inline-flex justify-center items-center font-mono text-xs uppercase tracking-wider border border-[var(--stone)] px-5 py-3 hover:bg-[var(--stone)] hover:text-[var(--sage)] transition">Get the brochure →</button>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- ==================== VIEW 2: DYNAMIC RANGE DETAIL PAGE (MATCHING PAGE_2.JPG WIREFRAME) ==================== -->
+  <div id="view-range" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <!-- BREADCRUMB & BACK LINK -->
+    <div class="mb-6 flex items-center justify-between border-b border-[var(--putty)] pb-4">
+      <button onclick="router.navigate('home')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)] transition">
+        ← Back to All Ranges
+      </button>
+      <span class="font-mono text-xs text-[var(--ink)]/50" id="rangeBreadcrumb">Home / Products / Range</span>
+    </div>
+
+    <!-- RANGE PAGE HEADER (RANGE NAME & DOWNLOAD BROCHURE BUTTON AS IN PAGE_2.JPG) -->
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+      <div>
+        <h1 class="font-display text-4xl md:text-5xl" id="rangeTitle">Beaumont Tiles Exclusives</h1>
+        <p class="text-sm text-[var(--ink)]/70 mt-2 max-w-2xl" id="rangeDesc">
+          Curated designer vanities, shaving cabinets, and matching storage solutions created exclusively for Beaumont Tiles specification.
+        </p>
+      </div>
+
+      <button id="rangeBrochureBtn" onclick="router.navigate('brochures')" class="inline-flex items-center justify-center px-6 py-3.5 bg-[var(--ink)] text-[var(--stone)] text-xs font-mono uppercase tracking-wider hover:bg-[var(--sage)] transition shadow-md whitespace-nowrap">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="mr-2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span id="brochureBtnLabel">Download range brochure</span>
+      </button>
+    </div>
+
+    <!-- TAG FILTER BAR -->
+    <div class="flex flex-wrap items-center justify-between gap-4 py-4 px-5 bg-[var(--stone-deep)]/50 border border-[var(--putty)] mb-10">
+      <div class="flex flex-wrap items-center gap-2" id="tagFilters">
+        <span class="font-mono text-xs text-[var(--ink)] font-medium mr-2 uppercase tracking-wide">Filter by Tag:</span>
+        <button onclick="rangeApp.filterByTag('all')" class="tag-btn active font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">All Items</button>
+        <button onclick="rangeApp.filterByTag('vanity')" class="tag-btn font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Vanity</button>
+        <button onclick="rangeApp.filterByTag('compact')" class="tag-btn font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Compact</button>
+        <button onclick="rangeApp.filterByTag('mirror')" class="tag-btn font-mono text-xs px-3.5 py-1.5 border border-[var(--putty)] bg-white hover:border-[var(--ink)] transition">Mirror Cabinet</button>
+      </div>
+
+      <span class="font-mono text-xs text-[var(--sage)]" id="productCountLabel">Showing 12 Products</span>
+    </div>
+
+    <!-- PRODUCT CARDS GRID (4 COLUMNS AS SHOWN IN PAGE_2.JPG) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7" id="productGrid"></div>
+  </div>
+
+  <!-- ==================== VIEW 3: DYNAMIC PRODUCT DETAIL PAGE ==================== -->
+  <div id="view-product" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 flex items-center justify-between border-b border-[var(--putty)] pb-4">
+      <button id="productBackBtn" onclick="router.navigate('range/beaumont')" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)] transition">
+        ← Back to Range
+      </button>
+      <span class="font-mono text-xs text-[var(--ink)]/50" id="productBreadcrumb">Home / Products / Product Detail</span>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
+      <!-- LEFT: GALLERY IMAGE -->
+      <div class="lg:col-span-6">
+        <div class="aspect-[4/5] bg-[var(--stone-deep)] border border-[var(--putty)] overflow-hidden relative shadow-sm">
+          <img id="pdetailImage" src="" alt="Product Detail" class="w-full h-full object-cover specimen">
+          <span id="pdetailCategory" class="absolute top-4 left-4 bg-[var(--ink)] text-[var(--stone)] font-mono text-xs uppercase px-3 py-1 backdrop-blur">Vanity</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: SPECS & ACTIONS -->
+      <div class="lg:col-span-6 flex flex-col justify-between">
+        <div>
+          <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]" id="pdetailSubtitle">Marquis Signature Collection</span>
+          <h1 class="font-display text-4xl md:text-5xl mt-1 mb-4 text-[var(--ink)]" id="pdetailTitle">Product Name</h1>
+          <p class="text-base text-[var(--ink)]/80 leading-relaxed mb-6 font-display" id="pdetailSpecs">
+            Product description and architectural joinery specifications.
+          </p>
+
+          <div class="space-y-4 border-t border-b border-[var(--putty)] py-6 mb-8 font-mono text-xs">
+            <div class="grid grid-cols-3 gap-2">
+              <span class="text-[var(--sage)] font-medium">Standard Widths:</span>
+              <span class="col-span-2 text-[var(--ink)]">750mm / 900mm / 1200mm / 1500mm / 1800mm</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <span class="text-[var(--sage)] font-medium">Mounting Type:</span>
+              <span class="col-span-2 text-[var(--ink)]">Wall Hung Console / Floor Standing Plinth</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <span class="text-[var(--sage)] font-medium">Cabinet Hardware:</span>
+              <span class="col-span-2 text-[var(--ink)]">Blum Soft-Close Hinges & Push-To-Open Drawers</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2">
+              <span class="text-[var(--sage)] font-medium">Benchtop Options:</span>
+              <span class="col-span-2 text-[var(--ink)]">Caesarstone / Solid Australian Timber / Integrated Ceramic</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4">
+          <p class="font-mono text-xs uppercase text-[var(--sage)] font-bold tracking-wider">Technical Document Downloads</p>
+          <div class="grid grid-cols-2 gap-3 font-mono text-xs">
+            <button id="pdocSpec" class="p-3 bg-white border border-[var(--putty)] flex items-center justify-between hover:border-[var(--ink)] transition">
+              <span>📄 Spec Sheet (PDF)</span>
+              <span class="text-[var(--sage)]">↓</span>
+            </button>
+            <button id="pdocOrder" class="p-3 bg-white border border-[var(--putty)] flex items-center justify-between hover:border-[var(--ink)] transition">
+              <span>📋 Order Form (PDF)</span>
+              <span class="text-[var(--sage)]">↓</span>
+            </button>
+            <button id="pdocInfo" class="p-3 bg-white border border-[var(--putty)] flex items-center justify-between hover:border-[var(--ink)] transition">
+              <span>ℹ️ Info Sheet (PDF)</span>
+              <span class="text-[var(--sage)]">↓</span>
+            </button>
+            <button id="pdocImages" class="p-3 bg-white border border-[var(--putty)] flex items-center justify-between hover:border-[var(--ink)] transition">
+              <span>🖼️ Aset Foto (ZIP)</span>
+              <span class="text-[var(--sage)]">↓</span>
+            </button>
+          </div>
+
+          <button onclick="router.navigate('stockists')" class="w-full bg-[var(--ink)] text-white font-mono text-xs uppercase tracking-wider py-4 hover:bg-[var(--sage)] transition shadow-md mt-4">
+            Locate Showroom to Order Product →
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="slide" data-slide>
-    <img src="https://images.unsplash.com/photo-1748680137039-fd8873e5bd48?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Tradelink vanity detail">
-    <div class="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/70 via-[var(--ink)]/10 to-transparent"></div>
-    <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-[var(--stone)]">
-      <p class="font-mono text-xs tracking-[0.2em] uppercase text-[var(--sage-light)] mb-4">Trade specification — 02/03</p>
-      <h1 class="font-display text-4xl md:text-6xl leading-[1.05] mb-5">Spec sheets, order forms,<br>ready to download.</h1>
-      <a href="#" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide border border-[var(--stone)] px-5 py-3 hover:bg-[var(--stone)] hover:text-[var(--ink)] transition">Find a stockist →</a>
+  <!-- ==================== VIEW 4: DYNAMIC ABOUT US PAGE ==================== -->
+  <div id="view-about" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 border-b border-[var(--putty)] pb-4 flex items-center justify-between">
+      <button onclick="router.navigate('home')" class="font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)]">← Back to Home</button>
+      <span class="font-mono text-xs text-[var(--ink)]/50">Home / About Us</span>
+    </div>
+    <div class="max-w-4xl mx-auto py-8">
+      <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Our Craftsmanship</span>
+      <h1 class="font-display text-4xl md:text-5xl mt-2 mb-6">Built for Australian Homes & Architect Specifications</h1>
+      <p class="font-display text-xl md:text-2xl leading-relaxed text-[var(--ink)]/85 mb-8">
+        At Marquis, every bathroom cabinet, vanity top, and mirror is engineered with precision joinery standards. We draw up designs directly with installers and architects to deliver bathroom furniture that stands up to daily humidity, moisture, and wear for over twenty years.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 my-12">
+        <div class="bg-white p-6 border border-[var(--putty)] shadow-sm">
+          <h3 class="font-display text-xl mb-2">100% Australian Joinery</h3>
+          <p class="text-xs text-[var(--ink)]/70 leading-relaxed">Manufactured locally using highly moisture-resistant (HMR) board and Blum hardware guarantees.</p>
+        </div>
+        <div class="bg-white p-6 border border-[var(--putty)] shadow-sm">
+          <h3 class="font-display text-xl mb-2">Architectural Customization</h3>
+          <p class="text-xs text-[var(--ink)]/70 leading-relaxed">Over 30 Polytec, Laminex, Caesarstone, and natural Australian timber finishes to match any interior aesthetic.</p>
+        </div>
+        <div class="bg-white p-6 border border-[var(--putty)] shadow-sm">
+          <h3 class="font-display text-xl mb-2">Lifetime Hardware Guarantee</h3>
+          <p class="text-xs text-[var(--ink)]/70 leading-relaxed">Soft-close hinges and drawer runners engineered for over 100,000 open/close cycles.</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="slide" data-slide>
-    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1800&h=1000&fit=crop&auto=format&q=80" class="specimen-strong w-full h-full object-cover" alt="Samios compact vanity">
-    <div class="absolute inset-0 bg-gradient-to-t from-[var(--ink)]/70 via-[var(--ink)]/10 to-transparent"></div>
-    <div class="absolute bottom-14 left-6 md:left-16 max-w-xl text-[var(--stone)]">
-      <p class="font-mono text-xs tracking-[0.2em] uppercase text-[var(--sage-light)] mb-4">Small space living — 03/03</p>
-      <h1 class="font-display text-4xl md:text-6xl leading-[1.05] mb-5">Compact ranges,<br>full-size thinking.</h1>
-      <a href="#ranges" class="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide border border-[var(--stone)] px-5 py-3 hover:bg-[var(--stone)] hover:text-[var(--ink)] transition">Browse the ranges →</a>
+  <!-- ==================== VIEW 5: DYNAMIC BROCHURES PAGE ==================== -->
+  <div id="view-brochures" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 border-b border-[var(--putty)] pb-4 flex items-center justify-between">
+      <button onclick="router.navigate('home')" class="font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)]">← Back to Home</button>
+      <span class="font-mono text-xs text-[var(--ink)]/50">Home / Range Brochures</span>
+    </div>
+    <div class="mb-10">
+      <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Downloads</span>
+      <h1 class="font-display text-4xl md:text-5xl mt-1">Marquis Range Brochures</h1>
+      <p class="text-sm text-[var(--ink)]/70 mt-2">Download high-resolution technical specification guides and order matrices for all five Marquis collections.</p>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="bg-white border border-[var(--putty)] p-6 flex flex-col justify-between shadow-sm">
+        <div>
+          <span class="font-mono text-xs text-[var(--sage)]">01 / Collection PDF</span>
+          <h3 class="font-display text-2xl mt-1 mb-2">Marquis Signature Brochure</h3>
+          <p class="text-xs text-[var(--ink)]/70 mb-4">Complete guide for signature vanities, mirrors, and custom joinery options.</p>
+        </div>
+        <button onclick="modals.toast('Downloading Marquis Signature Brochure (PDF)...')" class="w-full bg-[var(--ink)] text-white font-mono text-xs uppercase tracking-wider py-3 hover:bg-[var(--sage)] transition">Download PDF (8.4 MB) →</button>
+      </div>
+      <div class="bg-white border border-[var(--putty)] p-6 flex flex-col justify-between shadow-sm">
+        <div>
+          <span class="font-mono text-xs text-[var(--sage)]">02 / Collection PDF</span>
+          <h3 class="font-display text-2xl mt-1 mb-2">Beaumont Tiles Exclusive Brochure</h3>
+          <p class="text-xs text-[var(--ink)]/70 mb-4">Exclusive tile-matched vanity finishes and specification tables.</p>
+        </div>
+        <button onclick="modals.toast('Downloading Beaumont Exclusive Brochure (PDF)...')" class="w-full bg-[var(--ink)] text-white font-mono text-xs uppercase tracking-wider py-3 hover:bg-[var(--sage)] transition">Download PDF (6.2 MB) →</button>
+      </div>
+      <div class="bg-white border border-[var(--putty)] p-6 flex flex-col justify-between shadow-sm">
+        <div>
+          <span class="font-mono text-xs text-[var(--sage)]">03 / Collection PDF</span>
+          <h3 class="font-display text-2xl mt-1 mb-2">Tradelink Trade Essentials Brochure</h3>
+          <p class="text-xs text-[var(--ink)]/70 mb-4">Quick-ship trade vanities, dimensions, and commercial ordering codes.</p>
+        </div>
+        <button onclick="modals.toast('Downloading Tradelink Essentials Brochure (PDF)...')" class="w-full bg-[var(--ink)] text-white font-mono text-xs uppercase tracking-wider py-3 hover:bg-[var(--sage)] transition">Download PDF (5.1 MB) →</button>
+      </div>
+      <div class="bg-white border border-[var(--putty)] p-6 flex flex-col justify-between shadow-sm">
+        <div>
+          <span class="font-mono text-xs text-[var(--sage)]">04 / Collection PDF</span>
+          <h3 class="font-display text-2xl mt-1 mb-2">Samios Considered Forms Brochure</h3>
+          <p class="text-xs text-[var(--ink)]/70 mb-4">Architectural stone top vanities, metallic finishes, and technical drawings.</p>
+        </div>
+        <button onclick="modals.toast('Downloading Samios Considered Forms Brochure (PDF)...')" class="w-full bg-[var(--ink)] text-white font-mono text-xs uppercase tracking-wider py-3 hover:bg-[var(--sage)] transition">Download PDF (7.8 MB) →</button>
+      </div>
+      <div class="bg-white border border-[var(--putty)] p-6 flex flex-col justify-between shadow-sm">
+        <div>
+          <span class="font-mono text-xs text-[var(--sage)]">05 / Collection PDF</span>
+          <h3 class="font-display text-2xl mt-1 mb-2">Blue Space Compact Living Brochure</h3>
+          <p class="text-xs text-[var(--ink)]/70 mb-4">Small-format vanities and powder room solutions.</p>
+        </div>
+        <button onclick="modals.toast('Downloading Blue Space Compact Brochure (PDF)...')" class="w-full bg-[var(--ink)] text-white font-mono text-xs uppercase tracking-wider py-3 hover:bg-[var(--sage)] transition">Download PDF (4.9 MB) →</button>
+      </div>
     </div>
   </div>
 
-  <!-- controls -->
-  <button id="prevSlide" aria-label="Previous slide" class="hidden md:flex items-center justify-center absolute left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full border border-[var(--stone)]/50 text-[var(--stone)] hover:bg-[var(--stone)]/10 transition">‹</button>
-  <button id="nextSlide" aria-label="Next slide" class="hidden md:flex items-center justify-center absolute right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full border border-[var(--stone)]/50 text-[var(--stone)] hover:bg-[var(--stone)]/10 transition">›</button>
-
-  <div class="absolute bottom-6 right-6 md:right-16 flex gap-2" id="dots"></div>
-</section>
-
-<!-- ============ ABOUT ============ -->
-<section id="about" class="max-w-4xl mx-auto px-6 md:px-8 py-24 text-center">
-  <p class="font-mono text-xs uppercase tracking-[0.2em] text-[var(--sage)] mb-6">About us</p>
-  <p class="font-display text-2xl md:text-3xl leading-relaxed">
-    Marquis designs bathroom furniture for the way rooms are actually built and lived in —
-    drawn up with installers, specified by architects, and finished to sit quietly in a space
-    for twenty years. Five ranges, one standard of joinery.
-  </p>
-</section>
-
-<!-- ============ RANGES GRID ============ -->
-<section id="ranges" class="max-w-7xl mx-auto px-6 md:px-8 pb-24">
-  <div class="flex items-end justify-between mb-10 border-b border-[var(--putty)] pb-6">
-    <h2 class="font-display text-3xl md:text-4xl">Shop by range</h2>
-    <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage)] hidden sm:block">Filter — vanity / compact / mirror / tags</p>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-
-    <!-- Card template x5 -->
-    <a href="#" class="range-card group block bg-white border border-[var(--putty)] overflow-hidden" tabindex="0">
-      <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
-        <img src="https://images.unsplash.com/photo-1682888818696-906287d759f5?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Marquis range">
-        <span class="index-mark absolute top-4 left-4 text-white/90 font-mono" data-index="01 / 05"></span>
-      </div>
-      <div class="p-5">
-        <h3 class="font-display text-xl">Marquis</h3>
-        <p class="text-sm text-[var(--ink)]/60 mt-1">Signature range · vanities, mirrors, tallboys</p>
-        <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-          <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
-          <p>— Order Form</p>
-          <p>— Info Sheet</p>
-          <p>— Images</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="#" class="range-card group block bg-white border border-[var(--putty)] overflow-hidden" tabindex="0">
-      <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
-        <img src="https://images.unsplash.com/photo-1712214741533-3dd5b8013ca7?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Beaumont range">
-        <span class="index-mark absolute top-4 left-4 text-white/90 font-mono" data-index="02 / 05"></span>
-      </div>
-      <div class="p-5">
-        <h3 class="font-display text-xl">Beaumont</h3>
-        <p class="text-sm text-[var(--ink)]/60 mt-1">Exclusive tiles · matched vanity finishes</p>
-        <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-          <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
-          <p>— Order Form</p>
-          <p>— Info Sheet</p>
-          <p>— Images</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="#" class="range-card group block bg-white border border-[var(--putty)] overflow-hidden" tabindex="0">
-      <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
-        <img src="https://images.unsplash.com/photo-1600488999585-e4364713b90a?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Tradelink range">
-        <span class="index-mark absolute top-4 left-4 text-white/90 font-mono" data-index="03 / 05"></span>
-      </div>
-      <div class="p-5">
-        <h3 class="font-display text-xl">Tradelink</h3>
-        <p class="text-sm text-[var(--ink)]/60 mt-1">Trade essentials · fast lead times</p>
-        <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-          <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
-          <p>— Order Form</p>
-          <p>— Info Sheet</p>
-          <p>— Images</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="#" class="range-card group block bg-white border border-[var(--putty)] overflow-hidden" tabindex="0">
-      <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
-        <img src="https://images.unsplash.com/photo-1604769319166-010643ace337?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Samios range">
-        <span class="index-mark absolute top-4 left-4 text-white/90 font-mono" data-index="04 / 05"></span>
-      </div>
-      <div class="p-5">
-        <h3 class="font-display text-xl">Samios</h3>
-        <p class="text-sm text-[var(--ink)]/60 mt-1">Considered forms · natural stone tops</p>
-        <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-          <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
-          <p>— Order Form</p>
-          <p>— Info Sheet</p>
-          <p>— Images</p>
-        </div>
-      </div>
-    </a>
-
-    <a href="#" class="range-card group block bg-white border border-[var(--putty)] overflow-hidden" tabindex="0">
-      <div class="plate relative aspect-[4/5] overflow-hidden bg-[var(--stone-deep)]">
-        <img src="https://images.unsplash.com/photo-1635286771551-9d7241ce7811?w=700&h=900&fit=crop&auto=format&q=80" class="w-full h-full object-cover" alt="Blue Space range">
-        <span class="index-mark absolute top-4 left-4 text-white/90 font-mono" data-index="05 / 05"></span>
-      </div>
-      <div class="p-5">
-        <h3 class="font-display text-xl">Blue Space</h3>
-        <p class="text-sm text-[var(--ink)]/60 mt-1">Compact living · small-format bathrooms</p>
-        <div class="drawer mt-3 font-mono text-xs text-[var(--sage)] space-y-1">
-          <p class="border-t border-[var(--putty)] pt-3">— Spec Sheet</p>
-          <p>— Order Form</p>
-          <p>— Info Sheet</p>
-          <p>— Images</p>
-        </div>
-      </div>
-    </a>
-
-    <!-- CTA tile -->
-    <div class="flex flex-col justify-center items-start bg-[var(--sage)] text-[var(--stone)] p-8">
-      <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage-pale)] mb-3">Can't decide?</p>
-      <h3 class="font-display text-2xl mb-4">Download the full range brochure.</h3>
-      <a href="#" class="font-mono text-xs uppercase tracking-wide border border-[var(--stone)] px-4 py-2 hover:bg-[var(--stone)] hover:text-[var(--sage)] transition">Get the brochure →</a>
+  <!-- ==================== VIEW 6: DYNAMIC STOCKISTS PAGE ==================== -->
+  <div id="view-stockists" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 border-b border-[var(--putty)] pb-4 flex items-center justify-between">
+      <button onclick="router.navigate('home')" class="font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)]">← Back to Home</button>
+      <span class="font-mono text-xs text-[var(--ink)]/50">Home / Stockist Directory</span>
     </div>
-
+    <div class="mb-8">
+      <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Dealer Network</span>
+      <h1 class="font-display text-4xl md:text-5xl mt-1">Find a Marquis Stockist</h1>
+      <p class="text-sm text-[var(--ink)]/70 mt-2">Locate authorized Marquis showrooms, Beaumont Tiles, Tradelink, and Samios plumbing stockists across Australia.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 font-mono text-xs">
+      <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+        <span class="text-[var(--sage)] text-[10px] uppercase font-bold">NSW — Sydney Central</span>
+        <h3 class="font-display text-lg text-[var(--ink)] mt-1 font-medium">Beaumont Tiles Camperdown</h3>
+        <p class="text-[var(--ink)]/70 mt-1">120 Parramatta Rd, Camperdown NSW 2050</p>
+        <p class="text-[var(--ink)]/60 mt-2">Ph: (02) 9516 4000 · Mon-Sat 8:30am-5pm</p>
+      </div>
+      <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+        <span class="text-[var(--sage)] text-[10px] uppercase font-bold">NSW — Sydney South</span>
+        <h3 class="font-display text-lg text-[var(--ink)] mt-1 font-medium">Tradelink Alexandria</h3>
+        <p class="text-[var(--ink)]/70 mt-1">45 Bourke Rd, Alexandria NSW 2015</p>
+        <p class="text-[var(--ink)]/60 mt-2">Ph: (02) 8338 9100 · Trade counter open</p>
+      </div>
+      <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+        <span class="text-[var(--sage)] text-[10px] uppercase font-bold">QLD — Brisbane</span>
+        <h3 class="font-display text-lg text-[var(--ink)] mt-1 font-medium">Samios Plumbing Supplies</h3>
+        <p class="text-[var(--ink)]/70 mt-1">88 Logan Rd, Woolloongabba QLD 4102</p>
+        <p class="text-[var(--ink)]/60 mt-2">Ph: (07) 3391 5500 · Display vanities on floor</p>
+      </div>
+      <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+        <span class="text-[var(--sage)] text-[10px] uppercase font-bold">VIC — Melbourne Central</span>
+        <h3 class="font-display text-lg text-[var(--ink)] mt-1 font-medium">Beaumont Tiles Richmond</h3>
+        <p class="text-[var(--ink)]/70 mt-1">415 Church St, Richmond VIC 3121</p>
+        <p class="text-[var(--ink)]/60 mt-2">Ph: (03) 9428 1144 · Full Marquis display</p>
+      </div>
+      <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+        <span class="text-[var(--sage)] text-[10px] uppercase font-bold">SA — Adelaide</span>
+        <h3 class="font-display text-lg text-[var(--ink)] mt-1 font-medium">Tradelink Mile End</h3>
+        <p class="text-[var(--ink)]/70 mt-1">15 Mile End Rd, Mile End SA 5031</p>
+        <p class="text-[var(--ink)]/60 mt-2">Ph: (08) 8352 1100 · Order desk available</p>
+      </div>
+      <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+        <span class="text-[var(--sage)] text-[10px] uppercase font-bold">WA — Perth</span>
+        <h3 class="font-display text-lg text-[var(--ink)] mt-1 font-medium">Blue Space Plumbing Osborne Park</h3>
+        <p class="text-[var(--ink)]/70 mt-1">320 Scarborough Beach Rd, WA 6017</p>
+        <p class="text-[var(--ink)]/60 mt-2">Ph: (08) 9242 7700 · Compact ranges stocked</p>
+      </div>
+    </div>
   </div>
-</section>
+
+  <!-- ==================== VIEW 7: DYNAMIC CONTACT US PAGE ==================== -->
+  <div id="view-contact" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 border-b border-[var(--putty)] pb-4 flex items-center justify-between">
+      <button onclick="router.navigate('home')" class="font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)]">← Back to Home</button>
+      <span class="font-mono text-xs text-[var(--ink)]/50">Home / Contact Us</span>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 py-4">
+      <div>
+        <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Get in Touch</span>
+        <h1 class="font-display text-4xl md:text-5xl mt-1 mb-4">Contact Marquis Team</h1>
+        <p class="text-sm text-[var(--ink)]/70 leading-relaxed mb-8">Whether you are an architect specifying a project, a plumber looking for technical specs, or a homeowner with a warranty inquiry, our customer team is here to assist.</p>
+        <form onsubmit="event.preventDefault(); modals.toast('Inquiry submitted! Thank you.');" class="space-y-4 font-mono text-xs">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block mb-1 text-[var(--ink)] font-medium">First Name</label>
+              <input type="text" required class="w-full border border-[var(--putty)] p-3 bg-white focus:outline-none focus:border-[var(--ink)]">
+            </div>
+            <div>
+              <label class="block mb-1 text-[var(--ink)] font-medium">Last Name</label>
+              <input type="text" required class="w-full border border-[var(--putty)] p-3 bg-white focus:outline-none focus:border-[var(--ink)]">
+            </div>
+          </div>
+          <div>
+            <label class="block mb-1 text-[var(--ink)] font-medium">Email Address</label>
+            <input type="email" required class="w-full border border-[var(--putty)] p-3 bg-white focus:outline-none focus:border-[var(--ink)]">
+          </div>
+          <div>
+            <label class="block mb-1 text-[var(--ink)] font-medium">Subject / Collection Inquiry</label>
+            <select class="w-full border border-[var(--putty)] p-3 bg-white focus:outline-none focus:border-[var(--ink)]">
+              <option>General Specification Inquiry</option>
+              <option>Beaumont Range Inquiry</option>
+              <option>Tradelink Trade Orders</option>
+              <option>Warranty / Technical Support</option>
+            </select>
+          </div>
+          <div>
+            <label class="block mb-1 text-[var(--ink)] font-medium">Message</label>
+            <textarea rows="4" required class="w-full border border-[var(--putty)] p-3 bg-white focus:outline-none focus:border-[var(--ink)]"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-[var(--ink)] text-white py-4 font-mono text-xs uppercase tracking-wider hover:bg-[var(--sage)] transition">Send Message →</button>
+        </form>
+      </div>
+      <div class="bg-[var(--stone-deep)]/40 p-8 border border-[var(--putty)] flex flex-col justify-between shadow-sm">
+        <div>
+          <h3 class="font-display text-2xl mb-4">Australian Head Office & Factory</h3>
+          <div class="space-y-4 font-mono text-xs text-[var(--ink)]/80">
+            <p><strong>Factory Address:</strong><br>15 Marquis Way, Newcastle NSW 2300, Australia</p>
+            <p><strong>Phone Support:</strong><br>1300 MARQUIS (1300 627 784)</p>
+            <p><strong>Email Contacts:</strong><br>sales@marquis.com.au<br>specs@marquis.com.au</p>
+            <p><strong>Operating Hours:</strong><br>Monday – Friday: 7:30 am – 5:00 pm AEST</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== VIEW 8: DYNAMIC FINISHES PAGE ==================== -->
+  <div id="view-finishes" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 border-b border-[var(--putty)] pb-4 flex items-center justify-between">
+      <button onclick="router.navigate('home')" class="font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)]">← Back to Home</button>
+      <span class="font-mono text-xs text-[var(--ink)]/50">Home / Finishes & Materials</span>
+    </div>
+    <div class="mb-8">
+      <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Customization</span>
+      <h1 class="font-display text-4xl md:text-5xl mt-1">Material Swatches & Finishes</h1>
+      <p class="text-sm text-[var(--ink)]/70 mt-2">Explore Polytec thermo-laminates, natural timber veneers, Caesarstone engineered tops, and premium hardware options.</p>
+    </div>
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 font-mono text-xs text-center">
+      <div class="p-4 bg-white border border-[var(--putty)] shadow-sm"><div class="h-20 bg-[#8C7A6B] mb-2 rounded-sm"></div>Natural Oak</div>
+      <div class="p-4 bg-white border border-[var(--putty)] shadow-sm"><div class="h-20 bg-[#3A4036] mb-2 rounded-sm"></div>Botanic Sage</div>
+      <div class="p-4 bg-white border border-[var(--putty)] shadow-sm"><div class="h-20 bg-[#2B2D2F] mb-2 rounded-sm"></div>Fluted Black</div>
+      <div class="p-4 bg-white border border-[var(--putty)] shadow-sm"><div class="h-20 bg-[#EBE7DF] mb-2 rounded-sm border"></div>Chalk Matte</div>
+      <div class="p-4 bg-white border border-[var(--putty)] shadow-sm"><div class="h-20 bg-[#C2AA94] mb-2 rounded-sm"></div>Prime Walnut</div>
+      <div class="p-4 bg-white border border-[var(--putty)] shadow-sm"><div class="h-20 bg-[#A3A8A0] mb-2 rounded-sm"></div>Caesarstone Grey</div>
+    </div>
+  </div>
+
+  <!-- ==================== VIEW 9: DYNAMIC FAQS PAGE ==================== -->
+  <div id="view-faqs" class="view-section hidden max-w-7xl mx-auto px-6 md:px-8 py-10">
+    <div class="mb-6 border-b border-[var(--putty)] pb-4 flex items-center justify-between">
+      <button onclick="router.navigate('home')" class="font-mono text-xs uppercase tracking-wider text-[var(--sage)] hover:text-[var(--ink)]">← Back to Home</button>
+      <span class="font-mono text-xs text-[var(--ink)]/50">Home / FAQs & Support</span>
+    </div>
+    <div class="max-w-4xl mx-auto py-6">
+      <span class="font-mono text-xs uppercase tracking-widest text-[var(--sage)]">Help Center</span>
+      <h1 class="font-display text-4xl md:text-5xl mt-1 mb-6">Frequently Asked Questions</h1>
+      <div class="space-y-4 font-mono text-xs">
+        <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+          <h3 class="font-display text-lg text-[var(--ink)] mb-2 font-medium">What is the standard lead time for Marquis vanities?</h3>
+          <p class="text-[var(--ink)]/70 leading-relaxed">Standard Express items ship within 5 business days. Custom finish vanities take between 10-15 business days depending on finish choice.</p>
+        </div>
+        <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+          <h3 class="font-display text-lg text-[var(--ink)] mb-2 font-medium">What warranty is provided on Marquis joinery?</h3>
+          <p class="text-[var(--ink)]/70 leading-relaxed">Marquis provides a 10-year cabinet warranty and a lifetime replacement warranty on all Blum soft-close door hinges and drawer runners.</p>
+        </div>
+        <div class="p-5 bg-white border border-[var(--putty)] shadow-sm">
+          <h3 class="font-display text-lg text-[var(--ink)] mb-2 font-medium">How do I clean and care for my vanity top?</h3>
+          <p class="text-[var(--ink)]/70 leading-relaxed">Use warm soapy water and a soft microfibre cloth. Avoid abrasive chemical cleaners or harsh scrubbing pads on timber or matte polytec surfaces.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
 
 <!-- ============ FOOTER ============ -->
-<footer class="bg-[var(--ink)] text-[var(--stone)]">
+<footer class="bg-[var(--ink)] text-[var(--stone)] mt-auto">
   <div class="max-w-7xl mx-auto px-6 md:px-8 pt-16 pb-10 grid grid-cols-2 md:grid-cols-5 gap-10">
 
     <div class="col-span-2 md:col-span-2">
       <p class="font-display text-2xl tracking-[0.15em] mb-4">MARQUIS</p>
-      <p class="text-sm text-[var(--stone)]/60 max-w-xs mb-6">Bathroom furniture, specified and installed across five ranges since day one.</p>
-      <form class="flex" onsubmit="return false;">
-        <input type="email" placeholder="Your email" class="bg-transparent border border-[var(--stone)]/30 px-4 py-3 text-sm w-full placeholder:text-[var(--stone)]/40 focus:outline-none focus:border-[var(--sage-light)]">
-        <button class="bg-[var(--sage)] px-5 py-3 text-xs font-mono uppercase tracking-wide whitespace-nowrap hover:bg-[var(--sage-light)] hover:text-[var(--ink)] transition">Subscribe</button>
+      <p class="text-sm text-[var(--stone)]/65 max-w-xs mb-6 leading-relaxed">Considered Australian bathroom furniture, specified and installed across five ranges since day one.</p>
+      <form class="flex" onsubmit="event.preventDefault(); modals.toast('Subscribed successfully! Thank you.');">
+        <input type="email" required placeholder="Your email address" class="bg-transparent border border-[var(--stone)]/30 px-4 py-3 text-xs text-[var(--stone)] w-full placeholder:text-[var(--stone)]/40 focus:outline-none focus:border-[var(--sage-light)]">
+        <button type="submit" class="bg-[var(--sage)] px-5 py-3 text-xs font-mono uppercase tracking-wider whitespace-nowrap hover:bg-[var(--sage-light)] hover:text-[var(--ink)] transition">Subscribe</button>
       </form>
     </div>
 
     <div>
-      <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage-light)] mb-4">Company</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-[var(--sage-light)] mb-4">Company</p>
       <ul class="space-y-3 text-sm text-[var(--stone)]/80">
-        <li><a href="#about" class="underline-grow">About us</a></li>
-        <li><a href="#" class="underline-grow">Contact</a></li>
-        <li><a href="#" class="underline-grow">Stockists</a></li>
+        <li><a href="#about" onclick="router.navigate('about'); return false;" class="underline-grow">About us</a></li>
+        <li><a href="#contact" onclick="router.navigate('contact'); return false;" class="underline-grow">Contact us</a></li>
+        <li><a href="#stockists" onclick="router.navigate('stockists'); return false;" class="underline-grow">Stockists</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage-light)] mb-4">Specification</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-[var(--sage-light)] mb-4">Specification</p>
       <ul class="space-y-3 text-sm text-[var(--stone)]/80">
-        <li><a href="#" class="underline-grow">Finishes</a></li>
-        <li><a href="#" class="underline-grow">FAQs</a></li>
-        <li><a href="#" class="underline-grow">Warranty</a></li>
+        <li><a href="#finishes" onclick="router.navigate('finishes'); return false;" class="underline-grow">Finishes</a></li>
+        <li><a href="#faqs" onclick="router.navigate('faqs'); return false;" class="underline-grow">FAQs</a></li>
+        <li><a href="#faqs" onclick="router.navigate('faqs'); return false;" class="underline-grow">Warranty</a></li>
       </ul>
     </div>
 
     <div>
-      <p class="font-mono text-xs uppercase tracking-wide text-[var(--sage-light)] mb-4">Support</p>
+      <p class="font-mono text-xs uppercase tracking-widest text-[var(--sage-light)] mb-4">Support</p>
       <ul class="space-y-3 text-sm text-[var(--stone)]/80">
-        <li><a href="#" class="underline-grow">Care instructions</a></li>
-        <li><a href="#" class="underline-grow">Track my order</a></li>
+        <li><a href="#faqs" onclick="router.navigate('faqs'); return false;" class="underline-grow">Care instructions</a></li>
+        <li><a href="#faqs" onclick="router.navigate('faqs'); return false;" class="underline-grow">Track my order</a></li>
       </ul>
     </div>
   </div>
 
-  <div class="max-w-7xl mx-auto px-6 md:px-8 py-6 border-t border-[var(--stone)]/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--stone)]/40 font-mono">
-    <p>© 2026 Marquis. All rights reserved.</p>
-    <div class="flex gap-4">
-      <a href="#" class="hover:text-[var(--stone)]">Facebook</a>
-      <a href="#" class="hover:text-[var(--stone)]">Pinterest</a>
-      <a href="#" class="hover:text-[var(--stone)]">Instagram</a>
+  <div class="max-w-7xl mx-auto px-6 md:px-8 py-6 border-t border-[var(--stone)]/15 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[var(--stone)]/50 font-mono">
+    <p>© 2026 Marquis Bathroom Products Pty Ltd. All rights reserved.</p>
+    <div class="flex gap-6">
+      <a href="https://facebook.com" target="_blank" rel="noopener" class="hover:text-[var(--stone)] transition">Facebook</a>
+      <a href="https://pinterest.com" target="_blank" rel="noopener" class="hover:text-[var(--stone)] transition">Pinterest</a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" class="hover:text-[var(--stone)] transition">Instagram</a>
     </div>
   </div>
 </footer>
 
-<script>
-  // Mobile menu
-  const mobileToggle = document.getElementById('mobileToggle');
-  const mobileMenu = document.getElementById('mobileMenu');
-  mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+<!-- TOAST NOTIFICATION CONTAINER -->
+<div id="toast" class="fixed bottom-6 right-6 bg-[var(--ink)] text-[var(--stone)] border border-[var(--sage-light)]/40 px-6 py-4 font-mono text-xs z-50 shadow-xl opacity-0 translate-y-4 transition-all duration-300 pointer-events-none flex items-center gap-3">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[var(--sage-light)]"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  <span id="toastMsg">Downloading Spec Sheet...</span>
+</div>
 
-  // Carousel
+<!-- ==================== JAVASCRIPT LOGIC & ROUTER ==================== -->
+<script>
+  // ================= DATA STORE FOR PRODUCTS =================
+  const PRODUCTS_DATA = [
+    {
+      id: 'crest',
+      name: 'Crest',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=700&fit=crop&q=80',
+      specs: 'Fluted wall-hung console vanity with curved detail.',
+      ranges: ['beaumont', 'marquis']
+    },
+    {
+      id: 'wake',
+      name: 'Wake',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1620626011761-996317b8d101?w=600&h=700&fit=crop&q=80',
+      specs: 'Natural Australian Oak double drawer vanity.',
+      ranges: ['beaumont', 'marquis', 'tradelink']
+    },
+    {
+      id: 'wave',
+      name: 'Wave',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1595428774223-ef52624120d2?w=600&h=700&fit=crop&q=80',
+      specs: 'Soft curved wall-hung vanity with stone benchtop.',
+      ranges: ['beaumont', 'samios']
+    },
+    {
+      id: 'iris',
+      name: 'Iris',
+      category: 'mirror',
+      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=700&fit=crop&q=80',
+      specs: 'Shaker drawer vanity with integrated medicine cabinet mirror.',
+      ranges: ['beaumont', 'marquis']
+    },
+    {
+      id: 'stockton',
+      name: 'Stockton',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1604709177225-055f99402ea3?w=600&h=700&fit=crop&q=80',
+      specs: 'Minimalist mint green console with ceramic basin.',
+      ranges: ['beaumont', 'tradelink']
+    },
+    {
+      id: 'shoal',
+      name: 'Shoal',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=700&fit=crop&q=80',
+      specs: 'Floating timber shelf vanity with vessel basin.',
+      ranges: ['beaumont', 'samios']
+    },
+    {
+      id: 'fullerton',
+      name: 'Fullerton',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=700&fit=crop&q=80',
+      specs: 'Classic white double basin cabinet vanity.',
+      ranges: ['beaumont', 'marquis', 'tradelink']
+    },
+    {
+      id: 'fingal',
+      name: 'Fingal',
+      category: 'vanity',
+      image: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=700&fit=crop&q=80',
+      specs: 'Vertical slat front console with pill arch mirror.',
+      ranges: ['beaumont', 'samios']
+    },
+    {
+      id: 'wave-compact',
+      name: 'Wave Compact',
+      category: 'compact',
+      image: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&h=700&fit=crop&q=80',
+      specs: 'Slimline dark fluted vanity for compact powder rooms.',
+      ranges: ['beaumont', 'bluespace']
+    },
+    {
+      id: 'fingal-compact',
+      name: 'Fingal Compact',
+      category: 'compact',
+      image: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?w=600&h=700&fit=crop&q=80',
+      specs: 'Slat door narrow vanity console with matching arch mirror.',
+      ranges: ['beaumont', 'bluespace']
+    },
+    {
+      id: 'fullerton-compact',
+      name: 'Fullerton Compact',
+      category: 'compact',
+      image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=700&fit=crop&q=80',
+      specs: 'Compact powder room vanity with integrated basin.',
+      ranges: ['beaumont', 'bluespace']
+    },
+    {
+      id: 'corlette',
+      name: 'Corlette',
+      category: 'compact',
+      image: 'https://images.unsplash.com/photo-1635286771551-9d7241ce7811?w=600&h=700&fit=crop&q=80',
+      specs: 'Light oak wall-hung compact vanity console.',
+      ranges: ['beaumont', 'bluespace', 'tradelink']
+    }
+  ];
+
+  const RANGE_METADATA = {
+    marquis: {
+      name: 'Marquis Range',
+      brochureBtn: 'Marquis Signature Range Brochure',
+      description: 'The Marquis signature collection represents our flagship Australian bathroom joinery — fully customizable tops, basins, and cabinet finishes.'
+    },
+    beaumont: {
+      name: 'Beaumont Tiles Exclusives',
+      brochureBtn: 'Beaumont Tiles Exclusive Range Brochure',
+      description: 'Exclusive vanity, tallboy, and mirror designs developed specifically in partnership with Beaumont Tiles design specifications.'
+    },
+    tradelink: {
+      name: 'Tradelink Range',
+      brochureBtn: 'Tradelink Trade Essentials Brochure',
+      description: 'Commercial-grade, high-durability bathroom joinery engineered for rapid builder delivery and effortless installation.'
+    },
+    samios: {
+      name: 'Samios Range',
+      brochureBtn: 'Samios Considered Forms Brochure',
+      description: 'Architectural vanity forms crafted with engineered quartz, solid timber grains, and refined matte metallic hardware.'
+    },
+    bluespace: {
+      name: 'Blue Space Range',
+      brochureBtn: 'Blue Space Compact Range Brochure',
+      description: 'Thoughtfully proportioned vanities and tallboys designed to maximize style and storage in small apartments and powder rooms.'
+    }
+  };
+
+  // ================= ROUTER STATE MANAGEMENT =================
+  class Router {
+    constructor() {
+      window.addEventListener('popstate', () => this.handleRoute());
+      document.addEventListener('DOMContentLoaded', () => this.handleRoute());
+    }
+
+    navigate(path) {
+      window.location.hash = path;
+    }
+
+    handleRoute() {
+      const hash = window.location.hash.replace(/^#/, '') || 'home';
+      
+      // Hide all views & reset animation classes
+      document.querySelectorAll('.view-section').forEach(el => {
+        el.classList.add('hidden');
+        el.classList.remove('view-enter');
+      });
+
+      let targetView;
+      if (hash.startsWith('range/')) {
+        const rangeKey = hash.split('/')[1] || 'beaumont';
+        targetView = document.getElementById('view-range');
+        rangeApp.loadRange(rangeKey);
+      } else if (hash.startsWith('product/')) {
+        const productId = hash.split('/')[1] || 'crest';
+        targetView = document.getElementById('view-product');
+        productApp.loadProduct(productId);
+      } else {
+        const targetViewId = 'view-' + (hash || 'home');
+        targetView = document.getElementById(targetViewId) || document.getElementById('view-home');
+      }
+
+      if (targetView) {
+        targetView.classList.remove('hidden');
+        void targetView.offsetWidth; // Force reflow to restart CSS animation
+        targetView.classList.add('view-enter');
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }
+
+  const router = new Router();
+
+  // ================= PRODUCT DETAIL APP MANAGER =================
+  class ProductApp {
+    loadProduct(productId) {
+      const item = PRODUCTS_DATA.find(p => p.id === productId) || PRODUCTS_DATA[0];
+      
+      document.getElementById('pdetailTitle').innerText = item.name;
+      document.getElementById('pdetailImage').src = item.image;
+      document.getElementById('pdetailImage').alt = item.name;
+      document.getElementById('pdetailSpecs').innerText = item.specs;
+      document.getElementById('pdetailCategory').innerText = item.category.toUpperCase();
+
+      const mainRange = item.ranges[0] || 'beaumont';
+      const rangeMeta = RANGE_METADATA[mainRange] || RANGE_METADATA.beaumont;
+      document.getElementById('pdetailSubtitle').innerText = rangeMeta.name;
+      document.getElementById('productBreadcrumb').innerText = `Home / Products / ${rangeMeta.name} / ${item.name}`;
+
+      const backBtn = document.getElementById('productBackBtn');
+      backBtn.onclick = () => router.navigate(`range/${mainRange}`);
+      backBtn.innerText = `← Back to ${rangeMeta.name}`;
+
+      document.getElementById('pdocSpec').onclick = () => modals.downloadDoc(item.name, 'Spec Sheet');
+      document.getElementById('pdocOrder').onclick = () => modals.downloadDoc(item.name, 'Order Form');
+      document.getElementById('pdocInfo').onclick = () => modals.downloadDoc(item.name, 'Info Sheet');
+      document.getElementById('pdocImages').onclick = () => modals.downloadDoc(item.name, 'Images');
+    }
+  }
+
+  const productApp = new ProductApp();
+
+  // ================= RANGE APP MANAGER =================
+  class RangeApp {
+    constructor() {
+      this.currentRange = 'beaumont';
+      this.activeTag = 'all';
+    }
+
+    loadRange(rangeKey) {
+      this.currentRange = RANGE_METADATA[rangeKey] ? rangeKey : 'beaumont';
+      this.activeTag = 'all';
+      
+      const meta = RANGE_METADATA[this.currentRange];
+      document.getElementById('rangeTitle').innerText = meta.name;
+      document.getElementById('rangeDesc').innerText = meta.description;
+      document.getElementById('brochureBtnLabel').innerText = meta.brochureBtn;
+      document.getElementById('rangeBreadcrumb').innerText = `Home / Products / ${meta.name}`;
+
+      const tagBtns = document.querySelectorAll('#tagFilters .tag-btn');
+      tagBtns.forEach(btn => btn.classList.remove('active'));
+      if (tagBtns[0]) tagBtns[0].classList.add('active');
+
+      this.renderProducts();
+    }
+
+    filterByTag(tag) {
+      this.activeTag = tag;
+      
+      const tagBtns = document.querySelectorAll('#tagFilters .tag-btn');
+      tagBtns.forEach(btn => {
+        const isMatch = btn.getAttribute('onclick').includes(`'${tag}'`);
+        btn.classList.toggle('active', isMatch);
+      });
+
+      this.renderProducts();
+    }
+
+    renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+
+      let items = PRODUCTS_DATA.filter(p => p.ranges.includes(this.currentRange));
+      
+      if (this.activeTag !== 'all') {
+        items = items.filter(p => p.category === this.activeTag);
+      }
+
+      const searchVal = document.getElementById('catalogueSearch').value.toLowerCase().trim();
+      if (searchVal) {
+        items = items.filter(p => p.name.toLowerCase().includes(searchVal) || p.specs.toLowerCase().includes(searchVal));
+      }
+
+      document.getElementById('productCountLabel').innerText = `Showing ${items.length} Product${items.length === 1 ? '' : 's'}`;
+
+      if (items.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center bg-white border border-[var(--putty)]">
+            <p class="font-display text-xl text-[var(--ink)]">No products found matching your filter criteria.</p>
+            <button onclick="rangeApp.filterByTag('all')" class="mt-4 font-mono text-xs uppercase border border-[var(--ink)] px-4 py-2 hover:bg-[var(--ink)] hover:text-white transition">Reset Filter</button>
+          </div>
+        `;
+        return;
+      }
+
+      items.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'product-card-anim bg-white border border-[var(--putty)] flex flex-col justify-between overflow-hidden shadow-sm hover:shadow-md transition duration-300';
+        card.style.animationDelay = `${idx * 45}ms`;
+        
+        card.innerHTML = `
+          <div>
+            <!-- CLICKABLE PRODUCT IMAGE TO OPEN DETAIL PAGE -->
+            <div onclick="router.navigate('product/${item.id}')" class="aspect-[4/5] bg-[var(--stone-deep)] overflow-hidden relative group cursor-pointer">
+              <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500 specimen">
+              <span class="absolute top-3 right-3 bg-[var(--stone)]/90 text-[var(--ink)] font-mono text-[10px] uppercase px-2 py-0.5 border border-[var(--putty)]">${item.category}</span>
+            </div>
+
+            <!-- CLICKABLE PRODUCT NAME -->
+            <div class="p-4 border-b border-[var(--putty)]/60">
+              <h3 onclick="router.navigate('product/${item.id}')" class="font-display text-lg font-medium text-[var(--ink)] cursor-pointer hover:underline hover:text-[var(--sage)] transition">${item.name}</h3>
+              <p class="text-xs text-[var(--ink)]/60 mt-1 line-clamp-2">${item.specs}</p>
+            </div>
+          </div>
+
+          <!-- TECHNICAL DOWNLOAD LINKS AS IN PAGE_2.JPG -->
+          <div class="p-4 bg-[var(--stone)]/30 font-mono text-xs">
+            <p class="text-[10px] uppercase text-[var(--sage)] font-semibold tracking-wider mb-2">Technical Downloads</p>
+            <ul class="space-y-1.5 text-[var(--ink)]/80">
+              <li>
+                <button onclick="modals.downloadDoc('${item.name}', 'Spec Sheet')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
+                  <span>- Spec Sheet</span>
+                  <span class="text-[10px] text-[var(--sage)]">PDF</span>
+                </button>
+              </li>
+              <li>
+                <button onclick="modals.downloadDoc('${item.name}', 'Order Form')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
+                  <span>- Order Form</span>
+                  <span class="text-[10px] text-[var(--sage)]">PDF</span>
+                </button>
+              </li>
+              <li>
+                <button onclick="modals.downloadDoc('${item.name}', 'Info Sheet')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
+                  <span>- Info Sheet</span>
+                  <span class="text-[10px] text-[var(--sage)]">PDF</span>
+                </button>
+              </li>
+              <li>
+                <button onclick="modals.downloadDoc('${item.name}', 'Images')" class="hover:text-[var(--sage)] flex items-center justify-between w-full hover:underline">
+                  <span>- Images</span>
+                  <span class="text-[10px] text-[var(--sage)]">ZIP</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+        `;
+
+        grid.appendChild(card);
+      });
+    }
+  }
+
+  const rangeApp = new RangeApp();
+
+  document.getElementById('catalogueSearch').addEventListener('input', () => {
+    if (!document.getElementById('view-range').classList.contains('hidden')) {
+      rangeApp.renderProducts();
+    }
+  });
+
+  // ================= TOAST NOTIFICATION SYSTEM =================
+  class Modals {
+    downloadDoc(productName, docType) {
+      this.toast(`Downloading ${productName} — ${docType}...`);
+    }
+
+    toast(msg) {
+      const t = document.getElementById('toast');
+      document.getElementById('toastMsg').innerText = msg;
+      t.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      
+      setTimeout(() => {
+        t.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 3500);
+    }
+  }
+
+  const modals = new Modals();
+
+  function closeMobileMenu() {
+    document.getElementById('mobileMenu').classList.add('hidden');
+  }
+
+  document.getElementById('mobileToggle').addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+  });
+
+  // ================= CAROUSEL CONTROLLER =================
   const slides = document.querySelectorAll('[data-slide]');
   const dotsWrap = document.getElementById('dots');
   let current = 0;
@@ -393,15 +1206,15 @@
   });
   const dots = dotsWrap.children;
 
-  function render(){
+  function renderCarousel(){
     slides.forEach((s, i) => s.classList.toggle('active', i === current));
     Array.from(dots).forEach((d, i) => {
       d.style.background = i === current ? 'var(--sage-light)' : 'rgba(242,239,232,0.4)';
     });
   }
-  function goTo(i){ current = i; render(); resetTimer(); }
-  function next(){ current = (current + 1) % slides.length; render(); }
-  function prev(){ current = (current - 1 + slides.length) % slides.length; render(); }
+  function goTo(i){ current = i; renderCarousel(); resetTimer(); }
+  function next(){ current = (current + 1) % slides.length; renderCarousel(); }
+  function prev(){ current = (current - 1 + slides.length) % slides.length; renderCarousel(); }
   function resetTimer(){
     clearInterval(timer);
     timer = setInterval(next, 6000);
@@ -410,7 +1223,7 @@
   document.getElementById('nextSlide').addEventListener('click', () => { next(); resetTimer(); });
   document.getElementById('prevSlide').addEventListener('click', () => { prev(); resetTimer(); });
 
-  render();
+  renderCarousel();
   resetTimer();
 </script>
 
